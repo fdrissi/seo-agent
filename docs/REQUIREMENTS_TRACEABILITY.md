@@ -37,7 +37,7 @@ Test paths are relative to `tests/`. "e2e/honest-status" means
 | 7: behavior inside the Obsidian app | Partial | Two behaviors not checked in a running Obsidian. |
 | 10-17, 9, 14, 15: live provider behavior | Tested offline, live unverified | No credentials were used for any integration. |
 | Preamble: CI and container | Tested offline, live unverified | CI never executed; `docker build` never run (the Dockerfile build stage's inputs are checked statically, and the build stamp only in a simulated build context). |
-| Preamble: license, owner placeholders | Process | License decided by the owner: MIT (`LICENSE`, recorded in `LICENSE-NOTICE.md`). Owner placeholders (`@OWNER`, security contact) still pending. |
+| Preamble: license, owner placeholders | Process | License decided by the owner: MIT (`LICENSE`, recorded in `LICENSE-NOTICE.md`). Owner placeholders filled in: `@fdrissi` in CODEOWNERS, `fdrissi/seo-agent` in issue-template links, security reports via GitHub private vulnerability reporting. |
 
 ---
 

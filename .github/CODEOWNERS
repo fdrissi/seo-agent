@@ -1,9 +1,7 @@
 # Code owners: changes to these paths require review from the maintainer.
 #
-# OWNER ACTION REQUIRED: replace every "@OWNER" with the maintainer's GitHub
-# handle (or a team such as @org/maintainers) BEFORE the repository is public,
-# then enable branch protection with "Require review from Code Owners".
-# `npm run release:check` warns while the placeholder is still present.
+# Maintainer: @fdrissi. Enable branch protection with "Require review from
+# Code Owners" so these reviews are enforced.
 #
 # Sensitive areas (see AGENTS.md and docs/SECURITY_MODEL.md): CI workflows,
 # authentication, approvals, publishing/export, budget enforcement (including
@@ -11,39 +9,39 @@
 # release tooling and the secret-scan allowlist, schema migrations, and
 # dependency manifests.
 
-/.github/                         @OWNER
-/.github/workflows/               @OWNER
-/.github/CODEOWNERS               @OWNER
+/.github/                         @fdrissi
+/.github/workflows/               @fdrissi
+/.github/CODEOWNERS               @fdrissi
 
-/src/auth/                        @OWNER
-/src/approvals/                   @OWNER
-/src/budgets/                     @OWNER
+/src/auth/                        @fdrissi
+/src/approvals/                   @fdrissi
+/src/budgets/                     @fdrissi
 # Paid provider adapters call budgets.reserve / requests.prepare: a change here
 # can bypass budget enforcement without touching src/budgets.
-/src/integrations/                @OWNER
+/src/integrations/                @fdrissi
 # Workflow budget pre-flight and job orchestration (paid runs, approvals).
-/src/workflows/                   @OWNER
-/src/jobs/                        @OWNER
-/src/security/                    @OWNER
-/src/config/secrets.ts            @OWNER
-/src/config/env.ts                @OWNER
+/src/workflows/                   @fdrissi
+/src/jobs/                        @fdrissi
+/src/security/                    @fdrissi
+/src/config/secrets.ts            @fdrissi
+/src/config/env.ts                @fdrissi
 
 # Publishing and export paths (publisher adapters, manual export, mark-implemented)
-**/publish*                       @OWNER
-**/publisher*                     @OWNER
-**/export*                        @OWNER
-/src/cli/commands/approvals.ts    @OWNER
+**/publish*                       @fdrissi
+**/publisher*                     @fdrissi
+**/export*                        @fdrissi
+/src/cli/commands/approvals.ts    @fdrissi
 
-/scripts/                         @OWNER
-/migrations/                      @OWNER
-/prompts/                         @OWNER
+/scripts/                         @fdrissi
+/migrations/                      @fdrissi
+/prompts/                         @fdrissi
 
-/package.json                     @OWNER
-/package-lock.json                @OWNER
-/Dockerfile                       @OWNER
-/compose.yaml                     @OWNER
-/.dockerignore                    @OWNER
-/.gitignore                       @OWNER
+/package.json                     @fdrissi
+/package-lock.json                @fdrissi
+/Dockerfile                       @fdrissi
+/compose.yaml                     @fdrissi
+/.dockerignore                    @fdrissi
+/.gitignore                       @fdrissi
 
-/SECURITY.md                      @OWNER
-/LICENSE-NOTICE.md                @OWNER
+/SECURITY.md                      @fdrissi
+/LICENSE-NOTICE.md                @fdrissi

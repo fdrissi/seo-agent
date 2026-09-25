@@ -1,10 +1,8 @@
-# OWNER ACTION REQUIRED: replace OWNER/REPO below with the public repository path
-# before publishing (release-check warns while the placeholder is present).
 blank_issues_enabled: false
 contact_links:
   - name: Report a security vulnerability (private)
-    url: https://github.com/OWNER/REPO/security/policy
+    url: https://github.com/fdrissi/seo-agent/security/policy
     about: Do NOT open a public issue for vulnerabilities, leaked credentials, or prompt-injection bypasses. Follow SECURITY.md.
   - name: Support policy and questions
-    url: https://github.com/OWNER/REPO/blob/main/SUPPORT.md
+    url: https://github.com/fdrissi/seo-agent/blob/main/SUPPORT.md
     about: Best-effort community support for self-hosted installations. Read what is in scope first.

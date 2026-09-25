@@ -10,14 +10,10 @@ so most reports concern the code itself or its documentation.
 **Do not open a public issue, pull request, or discussion for a
 vulnerability.**
 
-- Preferred: GitHub private vulnerability reporting ("Report a vulnerability"
-  on the repository's Security tab), once the owner enables it.
-- Alternative contact: `<SECURITY_CONTACT>`
-
-> OWNER ACTION REQUIRED: replace `<SECURITY_CONTACT>` with a monitored
-> address (or remove the line if you rely only on private vulnerability
-> reporting) and enable private vulnerability reporting before the repository
-> becomes public. `npm run release:check` warns while the placeholder remains.
+Report it privately through GitHub's private vulnerability reporting:
+<https://github.com/fdrissi/seo-agent/security/advisories/new> (the
+repository's Security tab, then "Report a vulnerability"). Only the maintainer
+can see these reports.
 
 Please include the affected version or commit, a description of the impact,
 and reproduction steps **using synthetic data** (example.com / *.test domains,

@@ -83,10 +83,10 @@ Counted from the rows of the tables below (201 rows):
 
 | Status | Rows |
 | --- | --- |
-| implemented-and-tested | 156 |
+| implemented-and-tested | 157 |
 | implemented-awaiting-credentials | 30 |
 | optional-disabled | 6 |
-| genuinely-incomplete | 9 |
+| genuinely-incomplete | 8 |
 
 A row is a feature as the slices reported it, not a unit of equal size: the
 30 rows awaiting credentials include every adapter that talks to a live
@@ -366,7 +366,7 @@ provider adapter tested only against fakes is listed as
 | Redacted diagnostics export (inspect before sharing) | implemented-and-tested | `tests/integration/security/diagnostics-export.test.ts`, `tests/unit/security/diagnostics.test.ts` |
 | CI workflow (least privilege, fixtures only, no secrets) | implemented-awaiting-credentials | Statically checked by `release:check`; never executed (no GitHub repository or push was allowed). Actions are pinned by tag, not commit SHA. |
 | Optional container image (`Dockerfile`, ships the synthetic demo fixtures so `demo` runs in the container; the build stage copies `scripts/write-build-info.mjs` and `migrations/` so `npm run build` can stamp the image's build) | implemented-awaiting-credentials | Statically checked by `release:check`, including the build stage's inputs; `docker build` was never run. The stamp step was checked only in a simulated build context that copies what the build stage's `COPY` lines bring in and runs the stamp script without `tsc` (`tests/integration/security/release-check.test.ts`, "the Dockerfile build stage can stamp the build"). Base image not digest-pinned. `tests/unit/cli/demo-fixtures.test.ts` checks the missing-fixture error. |
-| Owner decisions: `CODEOWNERS` owner, security contact | genuinely-incomplete | By design the owner decides: `@OWNER` and `<SECURITY_CONTACT>` placeholders remain. The project license is decided: MIT (`LICENSE`, `package.json` `"license": "MIT"`, recorded in `LICENSE-NOTICE.md`); `release:check` reports the license item as PASS. |
+| Owner decisions: `CODEOWNERS` owner, security contact | implemented-and-tested | Filled in by the owner: `@fdrissi` in `.github/CODEOWNERS`, `fdrissi/seo-agent` in the issue-template links, and security reports go through GitHub private vulnerability reporting (`SECURITY.md`); `release:check` reports no placeholders. The project license is decided: MIT (`LICENSE`, `package.json` `"license": "MIT"`, recorded in `LICENSE-NOTICE.md`); `release:check` reports the license item as PASS. |
 
 ## 16. Optional features
 

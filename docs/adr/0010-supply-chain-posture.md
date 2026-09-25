@@ -41,8 +41,8 @@ changes to workflows, authentication, publishing, and budgets.
 - Smaller attack surface and reproducible installs.
 - Known open items (see FEATURE_STATUS): GitHub Actions are pinned by tag,
   not commit SHA; the Dockerfile base image is not digest-pinned; the CI
-  workflow and the container build were never executed; `@OWNER` in
-  `CODEOWNERS` is a placeholder until the owner sets it.
+  workflow and the container build were never executed before the first
+  push. `CODEOWNERS` names the maintainer (`@fdrissi`).
 - Optional Playwright is not a dependency; installing it is an explicit
   owner decision that changes the lockfile.
 

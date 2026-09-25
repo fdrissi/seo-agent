@@ -323,10 +323,9 @@ uploaded. CI runs on GitHub-hosted runners with the repository contents only.
 ## Next steps for the owner (no credentials needed)
 
 1. ~~Choose a license and apply it~~: done, MIT (`LICENSE`, recorded in `LICENSE-NOTICE.md`).
-2. Replace `@OWNER` in `.github/CODEOWNERS`, `OWNER/REPO` in
-   `.github/ISSUE_TEMPLATE/config.yml`, and `<SECURITY_CONTACT>` in
-   `SECURITY.md`; enable private vulnerability reporting and branch protection
-   with code-owner review.
+2. ~~Replace the owner placeholders~~: done (`@fdrissi`, `fdrissi/seo-agent`,
+   GitHub private vulnerability reporting in `SECURITY.md`). Still to do in the
+   GitHub settings: branch protection with code-owner review.
 3. Pin actions and the base image (`docs/RELEASING.md`).
 4. Run `npm run release:check -- --strict` and approve any public action
    explicitly.
