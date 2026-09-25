@@ -1,0 +1,61 @@
+# SYNTHETIC EXAMPLE CONFIGURATION. Not a real business.
+# Copy into your private workspace (npm run cli -- setup does this for you):
+#   <workspace>/config/sites/<site-id>.yaml
+# Unknown facts stay null/empty. Never put secrets in this file.
+schemaVersion: 1
+profile: core
+site:
+  id: example-site
+  businessName: Example Analytics Co (synthetic)
+  url: https://www.example.com/
+  allowedHostnames: [www.example.com]
+  urlAliases: []
+  pageTypes: []                 # e.g. { match: "/products/*", type: product }; first match wins
+business:
+  offer: Synthetic example offer used for documentation only.
+  targetCustomer: null
+  differentiators: []
+  productFacts: []
+  approvedClaims: []
+  prohibitedClaims: []
+market:
+  countries: []
+  languages: [en]
+  searchLocations: []
+  devices: [desktop, mobile]
+reporting:
+  currency: null
+  businessTimezone: null   # the business's own IANA zone (e.g. America/New_York); null = unknown: reports and budget periods then use scheduler.timezone, and config validation and reports show a warning. Never inferred from the scheduler zone.
+scheduler:
+  timezone: Europe/Tallinn
+  weekly: { enabled: false, cron: "0 7 * * 1" }
+  monthly: { enabled: false, cron: "0 8 2 * *" }
+google:
+  searchConsoleProperty: null   # e.g. "sc-domain:example.com"; discover with `auth status`
+  ga4PropertyId: null           # numeric GA4 property id
+conversions:
+  primaryEvents: []             # e.g. { name: generate_lead, meaning: "Demo form submitted", kind: lead }
+  secondaryEvents: []
+brand:
+  aliases: []
+crawl:
+  protectedPaths: []
+  excludedPaths: []
+  maxPages: 200
+research:
+  approvedDomains: []
+  competitors: []
+  seedTopics: []
+  subreddits: []
+  dataforseo: { mode: disabled }
+  apify: { actorId: 9sHOY9RzPYGjmTHo8, build: null }
+models:
+  cheap: null        # set CHEAP_MODEL or fill after verifying availability with `doctor --network`
+  reasoning: null
+  embedding: null
+budgets:
+  llmGateway: { monthlyUsd: "5.00", perRunUsd: "0.50" }
+  dataforseo: { weeklyUsd: "1.00", monthlyUsd: "10.00", perRunUsd: "0.50" }
+  apify: { monthlyUsd: "10.00", perRunUsd: "1.00" }
+  combinedMonthlyUsd: "25.00"
+features: {}
