@@ -1,0 +1,12 @@
+{
+  "_synthetic": true,
+  "_note": "Synthetic URL Inspection results (indexed state only; the API cannot run a live test).",
+  "byPath": {
+    "/": { "verdict": "PASS", "coverageState": "Submitted and indexed", "robotsTxtState": "ALLOWED", "indexingState": "INDEXING_ALLOWED", "pageFetchState": "SUCCESSFUL", "crawledAs": "MOBILE", "lastCrawlDaysAgo": 2, "sitemap": [] },
+    "/pricing": { "verdict": "PASS", "coverageState": "Submitted and indexed", "robotsTxtState": "ALLOWED", "indexingState": "INDEXING_ALLOWED", "pageFetchState": "SUCCESSFUL", "crawledAs": "MOBILE", "lastCrawlDaysAgo": 5 },
+    "/blog/how-to-choose-a-widget": { "verdict": "PASS", "coverageState": "Indexed, not submitted in sitemap", "robotsTxtState": "ALLOWED", "indexingState": "INDEXING_ALLOWED", "pageFetchState": "SUCCESSFUL", "crawledAs": "MOBILE", "lastCrawlDaysAgo": 9 },
+    "/features/reporting": { "verdict": "NEUTRAL", "coverageState": "Crawled - currently not indexed", "robotsTxtState": "ALLOWED", "indexingState": "INDEXING_ALLOWED", "pageFetchState": "SUCCESSFUL", "crawledAs": "MOBILE", "lastCrawlDaysAgo": 21 },
+    "/blog/old-widget-guide": { "verdict": "NEUTRAL", "coverageState": "Excluded by 'noindex' tag", "robotsTxtState": "ALLOWED", "indexingState": "BLOCKED_BY_META_TAG", "pageFetchState": "SUCCESSFUL", "crawledAs": "DESKTOP", "lastCrawlDaysAgo": 40 }
+  },
+  "default": { "verdict": "NEUTRAL", "coverageState": "URL is unknown to Google" }
+}

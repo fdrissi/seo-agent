@@ -1,0 +1,12 @@
+{
+  "_synthetic": true,
+  "_note": "Synthetic Web application OAuth client (must be rejected by the desktop flow).",
+  "web": {
+    "client_id": "000000000000-synthetic0web0client.apps.googleusercontent.com",
+    "project_id": "synthetic-fixture-project",
+    "client_secret": "synthetic-web-secret-not-real",
+    "redirect_uris": [
+      "https://app.example.com/callback"
+    ]
+  }
+}

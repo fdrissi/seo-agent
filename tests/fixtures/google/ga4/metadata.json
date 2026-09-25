@@ -1,0 +1,178 @@
+{
+  "_synthetic": true,
+  "_note": "Synthetic getMetadata response (subset). generate_lead and purchase are key events; per-event metrics are listed.",
+  "name": "properties/0/metadata",
+  "dimensions": [
+    {
+      "apiName": "date",
+      "uiName": "Date",
+      "category": "Synthetic"
+    },
+    {
+      "apiName": "landingPage",
+      "uiName": "Landing page",
+      "category": "Synthetic"
+    },
+    {
+      "apiName": "landingPagePlusQueryString",
+      "uiName": "Landing page + query string",
+      "category": "Synthetic"
+    },
+    {
+      "apiName": "hostName",
+      "uiName": "Hostname",
+      "category": "Synthetic"
+    },
+    {
+      "apiName": "sessionSource",
+      "uiName": "Session source",
+      "category": "Synthetic"
+    },
+    {
+      "apiName": "sessionMedium",
+      "uiName": "Session medium",
+      "category": "Synthetic"
+    },
+    {
+      "apiName": "sessionSourceMedium",
+      "uiName": "Session source / medium",
+      "category": "Synthetic"
+    },
+    {
+      "apiName": "sessionDefaultChannelGroup",
+      "uiName": "Session default channel group",
+      "category": "Synthetic"
+    },
+    {
+      "apiName": "eventName",
+      "uiName": "Event name",
+      "category": "Synthetic"
+    },
+    {
+      "apiName": "deviceCategory",
+      "uiName": "Device category",
+      "category": "Synthetic"
+    },
+    {
+      "apiName": "country",
+      "uiName": "Country",
+      "category": "Synthetic"
+    },
+    {
+      "apiName": "source",
+      "uiName": "Source",
+      "category": "Synthetic"
+    },
+    {
+      "apiName": "medium",
+      "uiName": "Medium",
+      "category": "Synthetic"
+    },
+    {
+      "apiName": "defaultChannelGroup",
+      "uiName": "Default channel group",
+      "category": "Synthetic"
+    }
+  ],
+  "metrics": [
+    {
+      "apiName": "sessions",
+      "uiName": "Sessions",
+      "type": "TYPE_INTEGER",
+      "category": "Synthetic"
+    },
+    {
+      "apiName": "engagedSessions",
+      "uiName": "Engaged sessions",
+      "type": "TYPE_INTEGER",
+      "category": "Synthetic"
+    },
+    {
+      "apiName": "eventCount",
+      "uiName": "Event count",
+      "type": "TYPE_INTEGER",
+      "category": "Synthetic"
+    },
+    {
+      "apiName": "keyEvents",
+      "uiName": "Key events",
+      "type": "TYPE_FLOAT",
+      "category": "Synthetic",
+      "deprecatedApiNames": [
+        "conversions"
+      ]
+    },
+    {
+      "apiName": "sessionKeyEventRate",
+      "uiName": "Session key event rate",
+      "type": "TYPE_FLOAT",
+      "category": "Synthetic",
+      "deprecatedApiNames": [
+        "sessionConversionRate"
+      ]
+    },
+    {
+      "apiName": "userKeyEventRate",
+      "uiName": "User key event rate",
+      "type": "TYPE_FLOAT",
+      "category": "Synthetic",
+      "deprecatedApiNames": [
+        "userConversionRate"
+      ]
+    },
+    {
+      "apiName": "totalUsers",
+      "uiName": "Total users",
+      "type": "TYPE_INTEGER",
+      "category": "Synthetic"
+    },
+    {
+      "apiName": "activeUsers",
+      "uiName": "Active users",
+      "type": "TYPE_INTEGER",
+      "category": "Synthetic"
+    },
+    {
+      "apiName": "totalRevenue",
+      "uiName": "Total revenue",
+      "type": "TYPE_CURRENCY",
+      "category": "Synthetic"
+    },
+    {
+      "apiName": "purchaseRevenue",
+      "uiName": "Purchase revenue",
+      "type": "TYPE_CURRENCY",
+      "category": "Synthetic"
+    },
+    {
+      "apiName": "sessionKeyEventRate:generate_lead",
+      "uiName": "Session key event rate for generate_lead",
+      "type": "TYPE_FLOAT",
+      "category": "Synthetic"
+    },
+    {
+      "apiName": "userKeyEventRate:generate_lead",
+      "uiName": "User key event rate for generate_lead",
+      "type": "TYPE_FLOAT",
+      "category": "Synthetic"
+    },
+    {
+      "apiName": "keyEvents:generate_lead",
+      "uiName": "Key events for generate_lead",
+      "type": "TYPE_FLOAT",
+      "category": "Synthetic"
+    },
+    {
+      "apiName": "sessionKeyEventRate:purchase",
+      "uiName": "Session key event rate for purchase",
+      "type": "TYPE_FLOAT",
+      "category": "Synthetic"
+    },
+    {
+      "apiName": "userKeyEventRate:purchase",
+      "uiName": "User key event rate for purchase",
+      "type": "TYPE_FLOAT",
+      "category": "Synthetic"
+    }
+  ]
+}

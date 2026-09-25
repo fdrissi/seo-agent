@@ -1,0 +1,135 @@
+{
+  "_synthetic": true,
+  "_note": "Synthetic GA4 definitions for the fixture provider. Values are generated deterministically per date; today and yesterday are partial and change as the clock advances.",
+  "timeZone": "America/New_York",
+  "currencyCode": "USD",
+  "subjectToThresholding": true,
+  "dataLossFromOtherRow": false,
+  "freshness": {
+    "partialFactorByLag": {
+      "0": 0.35,
+      "1": 0.8
+    }
+  },
+  "userRepeatFactor": 0.3,
+  "hosts": [
+    [
+      "www.example.com",
+      1.0
+    ]
+  ],
+  "channels": [
+    {
+      "source": "google",
+      "medium": "organic",
+      "group": "Organic Search",
+      "share": 0.55
+    },
+    {
+      "source": "bing",
+      "medium": "organic",
+      "group": "Organic Search",
+      "share": 0.07
+    },
+    {
+      "source": "(direct)",
+      "medium": "(none)",
+      "group": "Direct",
+      "share": 0.25
+    },
+    {
+      "source": "newsletter.example.net",
+      "medium": "referral",
+      "group": "Referral",
+      "share": 0.13
+    }
+  ],
+  "keyEvents": [
+    "generate_lead",
+    "purchase"
+  ],
+  "eventValues": {
+    "purchase": 49.5
+  },
+  "landingPages": [
+    {
+      "path": "/",
+      "dailySessions": 40,
+      "engagedRate": 0.58,
+      "events": {
+        "page_view": 2.1,
+        "generate_lead": 0.025,
+        "sign_up": 0.012
+      }
+    },
+    {
+      "path": "/pricing",
+      "dailySessions": 18,
+      "engagedRate": 0.66,
+      "events": {
+        "page_view": 2.8,
+        "generate_lead": 0.06,
+        "purchase": 0.02
+      }
+    },
+    {
+      "path": "/pricing?plan=pro",
+      "dailySessions": 4,
+      "engagedRate": 0.7,
+      "events": {
+        "page_view": 2.5,
+        "generate_lead": 0.08,
+        "purchase": 0.05
+      }
+    },
+    {
+      "path": "/blog/how-to-choose-a-widget",
+      "dailySessions": 22,
+      "engagedRate": 0.44,
+      "events": {
+        "page_view": 1.6,
+        "generate_lead": 0.006
+      }
+    },
+    {
+      "path": "/blog/widget-maintenance-checklist",
+      "dailySessions": 9,
+      "engagedRate": 0.51,
+      "events": {
+        "page_view": 1.4
+      }
+    },
+    {
+      "path": "/docs/Getting-Started",
+      "dailySessions": 6,
+      "engagedRate": 0.72,
+      "events": {
+        "page_view": 3.2,
+        "sign_up": 0.03
+      }
+    },
+    {
+      "path": "/contact",
+      "dailySessions": 2,
+      "engagedRate": 0.8,
+      "events": {
+        "page_view": 1.3,
+        "generate_lead": 0.3
+      }
+    },
+    {
+      "path": "(not set)",
+      "dailySessions": 2.5,
+      "engagedRate": 0.1,
+      "events": {}
+    }
+  ],
+  "restrictedMetrics": [],
+  "incompatibleMetrics": [],
+  "propertyQuota": {
+    "tokensPerDay": 200000,
+    "tokensPerHour": 40000,
+    "tokensPerProjectPerHour": 14000
+  },
+  "tokensPerRequest": 6
+}

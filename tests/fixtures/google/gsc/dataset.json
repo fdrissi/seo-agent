@@ -1,0 +1,44 @@
+{
+  "_synthetic": true,
+  "_note": "Synthetic Search Console definitions for the fixture provider. Page paths are joined to the configured property. Values are generated deterministically per date; recent days are partial and change as the clock advances (delayed revisions).",
+  "defaultHostPrefix": "www.",
+  "freshness": { "firstIncompleteLagDays": 2, "latestLagDays": 1, "partialFactorByLag": { "1": 0.45, "2": 0.8 } },
+  "anonymizedShare": 0.18,
+  "propertyImpressionDedup": 0.93,
+  "countries": [["usa", 0.55], ["gbr", 0.3], ["can", 0.15]],
+  "devices": [["MOBILE", 0.58], ["DESKTOP", 0.38], ["TABLET", 0.04]],
+  "pages": [
+    { "path": "/", "dailyImpressions": 260, "ctr": 0.09, "position": 3.1, "queries": [
+      { "query": "example widgets", "share": 0.38, "ctr": 0.14, "position": 2.2 },
+      { "query": "example widgets company", "share": 0.16, "ctr": 0.21, "position": 1.4 },
+      { "query": "buy widgets online", "share": 0.18, "ctr": 0.035, "position": 7.8 },
+      { "query": "widget store", "share": 0.1, "ctr": 0.02, "position": 11.5 }
+    ] },
+    { "path": "/pricing", "dailyImpressions": 120, "ctr": 0.06, "position": 5.4, "queries": [
+      { "query": "example widgets pricing", "share": 0.45, "ctr": 0.12, "position": 2.9 },
+      { "query": "widget subscription cost", "share": 0.25, "ctr": 0.025, "position": 8.6 },
+      { "query": "cheap widgets", "share": 0.12, "ctr": 0.004, "position": 17.2 }
+    ] },
+    { "path": "/blog/how-to-choose-a-widget", "dailyImpressions": 340, "ctr": 0.022, "position": 8.9, "searchAppearance": "VIDEO", "queries": [
+      { "query": "how to choose a widget", "share": 0.34, "ctr": 0.03, "position": 6.1 },
+      { "query": "best widget for small teams", "share": 0.22, "ctr": 0.012, "position": 9.4 },
+      { "query": "widget buying guide", "share": 0.16, "ctr": 0.02, "position": 7.3 },
+      { "query": "widget vs gadget", "share": 0.1, "ctr": 0.006, "position": 14.8 }
+    ] },
+    { "path": "/blog/widget-maintenance-checklist", "dailyImpressions": 150, "ctr": 0.03, "position": 7.2, "queries": [
+      { "query": "widget maintenance", "share": 0.5, "ctr": 0.035, "position": 5.5 },
+      { "query": "clean a widget", "share": 0.3, "ctr": 0.018, "position": 9.9 }
+    ] },
+    { "path": "/docs/Getting-Started", "dailyImpressions": 70, "ctr": 0.05, "position": 4.6, "queries": [
+      { "query": "example widgets setup", "share": 0.6, "ctr": 0.08, "position": 2.7 },
+      { "query": "widget installation steps", "share": 0.22, "ctr": 0.02, "position": 8.2 }
+    ] },
+    { "path": "/features/reporting", "dailyImpressions": 45, "ctr": 0.015, "position": 12.4, "queries": [
+      { "query": "widget reporting dashboard", "share": 0.55, "ctr": 0.012, "position": 11.8 },
+      { "query": "widget analytics", "share": 0.25, "ctr": 0.0, "position": 23.5 }
+    ] },
+    { "path": "/contact", "dailyImpressions": 18, "ctr": 0.08, "position": 3.8, "queries": [
+      { "query": "example widgets contact", "share": 0.7, "ctr": 0.1, "position": 1.9 }
+    ] }
+  ]
+}
