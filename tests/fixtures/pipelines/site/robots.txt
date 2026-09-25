@@ -1,0 +1,4 @@
+# SYNTHETIC robots.txt (demo / pipeline tests)
+User-agent: *
+Disallow: /admin/
+Allow: /
