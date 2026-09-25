@@ -1,0 +1,31 @@
+<!doctype html>
+<!-- SYNTHETIC fixture page for crawler tests -->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Synthetic Widgets Co - Home</title>
+  <meta name="description" content="Synthetic home page used by crawler tests. It links to every other fixture page on the site.">
+  <link rel="canonical" href="{{ORIGIN}}/">
+  <link rel="alternate" hreflang="en" href="{{ORIGIN}}/">
+  <link rel="alternate" hreflang="de" href="{{ORIGIN}}/de/">
+  <link rel="alternate" hreflang="x-default" href="{{ORIGIN}}/">
+</head>
+<body>
+  <header><nav><a href="/">Home</a> <a href="/about">About</a> <a href="/blog/">Blog</a></nav></header>
+  <main>
+    <h1>Synthetic Widgets</h1>
+    <p>We make synthetic widgets for testing crawlers. Read <a href="/about">about us</a> or the <a href="/old-page">old page</a>.</p>
+    <p>Links: <a href="/missing">a missing page</a>, <a href="/private/secret">private area</a>, <a href="/account">your account</a>,
+       <a href="/members">members</a>, <a href="/dup-a">duplicate A</a>, <a href="/dup-b">duplicate B</a>,
+       <a href="/noindex-page">noindex page</a>, <a href="/calendar/2026/1">event calendar</a>, <a href="/admin/panel">admin</a>,
+       <a href="/canonical-conflict">canonical conflict</a>, <a href="/de/">Deutsch</a>, <a href="/big">big page</a>,
+       <a href="/report.pdf">PDF report</a>, <a href="/filter?color=red">red filter</a>.</p>
+    <p>External: <a href="https://external.example.com/resource" rel="nofollow">external resource</a>.
+       <a href="mailto:hello@example.com">Email</a> <a href="javascript:void(0)">JS link</a> <a href="#top">Top</a></p>
+    <img src="/img/hero.png" alt="A synthetic widget on a desk">
+    <img src="/img/no-alt.png">
+    <img src="/img/spacer.gif" alt="" width="1" height="1">
+  </main>
+  <footer><a href="/about">About (footer)</a></footer>
+</body>
+</html>

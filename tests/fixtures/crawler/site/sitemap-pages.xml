@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SYNTHETIC urlset -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>{{ORIGIN}}/</loc><lastmod>2026-09-01</lastmod></url>
+  <url><loc>{{ORIGIN}}/about</loc></url>
+  <url><loc>{{ORIGIN}}/noindex-page</loc></url>
+  <url><loc>{{ORIGIN}}/private/listed-but-disallowed</loc></url>
+  <url><loc>{{ORIGIN}}/sitemap-only?a=1&amp;b=2</loc></url>
+  <url><loc>{{ORIGIN}}/gone</loc></url>
+  <url><loc>https://offsite.example.com/page</loc></url>
+</urlset>

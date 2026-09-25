@@ -1,0 +1,9 @@
+# SYNTHETIC robots.txt for crawler tests
+User-agent: *
+Disallow: /private/
+Allow: /
+
+User-agent: badbot
+Disallow: /
+
+Sitemap: {{ORIGIN}}/sitemap_index.xml
