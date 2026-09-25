@@ -1,0 +1,44 @@
+{
+  "_synthetic": true,
+  "kind": "pagespeedonline#result",
+  "captchaResult": "CAPTCHA_NOT_NEEDED",
+  "id": "https://www.example.test/pricing",
+  "analysisUTCTimestamp": "2026-09-24T08:00:00.000Z",
+  "version": { "major": 1, "minor": 0 },
+  "loadingExperience": {
+    "id": "https://www.example.test/pricing",
+    "initial_url": "https://www.example.test/pricing",
+    "overall_category": "AVERAGE",
+    "metrics": {
+      "FIRST_CONTENTFUL_PAINT_MS": { "percentile": 1500, "category": "FAST", "distributions": [ { "min": 0, "max": 1800, "proportion": 0.8 }, { "min": 1800, "max": 3000, "proportion": 0.15 }, { "min": 3000, "proportion": 0.05 } ] },
+      "INTERACTION_TO_NEXT_PAINT": { "percentile": 240, "category": "AVERAGE", "distributions": [ { "min": 0, "max": 200, "proportion": 0.7 }, { "min": 200, "max": 500, "proportion": 0.25 }, { "min": 500, "proportion": 0.05 } ] },
+      "LARGEST_CONTENTFUL_PAINT_MS": { "percentile": 2300, "category": "FAST", "distributions": [] },
+      "CUMULATIVE_LAYOUT_SHIFT_SCORE": { "percentile": 3, "category": "FAST", "distributions": [] }
+    }
+  },
+  "originLoadingExperience": {
+    "id": "https://www.example.test",
+    "overall_category": "FAST",
+    "metrics": {
+      "FIRST_CONTENTFUL_PAINT_MS": { "percentile": 1200, "category": "FAST", "distributions": [] }
+    }
+  },
+  "lighthouseResult": {
+    "requestedUrl": "https://www.example.test/pricing",
+    "finalUrl": "https://www.example.test/pricing",
+    "finalDisplayedUrl": "https://www.example.test/pricing",
+    "lighthouseVersion": "13.0.0",
+    "fetchTime": "2026-09-24T08:00:00.000Z",
+    "runWarnings": [],
+    "configSettings": { "formFactor": "mobile", "locale": "en-US", "onlyCategories": ["performance"] },
+    "categories": { "performance": { "id": "performance", "score": 0.87 } },
+    "audits": {
+      "first-contentful-paint": { "id": "first-contentful-paint", "score": 0.9, "numericValue": 1650.4, "numericUnit": "millisecond", "displayValue": "1.7 s" },
+      "largest-contentful-paint": { "id": "largest-contentful-paint", "score": 0.8, "numericValue": 2890.1, "numericUnit": "millisecond" },
+      "total-blocking-time": { "id": "total-blocking-time", "score": 0.7, "numericValue": 310, "numericUnit": "millisecond" },
+      "cumulative-layout-shift": { "id": "cumulative-layout-shift", "score": 1, "numericValue": 0.02, "numericUnit": "unitless" },
+      "speed-index": { "id": "speed-index", "score": 0.85, "numericValue": 3100, "numericUnit": "millisecond" },
+      "server-response-time": { "id": "server-response-time", "score": 1, "numericValue": 120, "numericUnit": "millisecond" }
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "_synthetic": true,
+  "id": "https://www.example.test/tiny",
+  "analysisUTCTimestamp": "2026-09-24T08:10:00.000Z",
+  "loadingExperience": { "initial_url": "https://www.example.test/tiny" },
+  "lighthouseResult": {
+    "lighthouseVersion": "13.0.0",
+    "runWarnings": [],
+    "configSettings": { "formFactor": "mobile" },
+    "categories": { "performance": { "score": 0.5 } },
+    "audits": {
+      "largest-contentful-paint": { "numericValue": 4100 },
+      "interaction-to-next-paint": { "numericValue": 999 }
+    }
+  }
+}

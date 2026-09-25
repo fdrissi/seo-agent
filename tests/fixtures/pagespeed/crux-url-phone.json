@@ -1,0 +1,15 @@
+{
+  "_synthetic": true,
+  "record": {
+    "key": { "formFactor": "PHONE", "url": "https://www.example.test/pricing" },
+    "metrics": {
+      "largest_contentful_paint": { "histogram": [ { "start": 0, "end": 2500, "density": 0.81 }, { "start": 2500, "end": 4000, "density": 0.12 }, { "start": 4000, "density": 0.07 } ], "percentiles": { "p75": 2100 } },
+      "interaction_to_next_paint": { "histogram": [ { "start": 0, "end": 200, "density": 0.85 }, { "start": 200, "end": 500, "density": 0.1 }, { "start": 500, "density": 0.05 } ], "percentiles": { "p75": 180 } },
+      "cumulative_layout_shift": { "histogram": [ { "start": "0.00", "end": "0.10", "density": 0.9 }, { "start": "0.10", "end": "0.25", "density": 0.06 }, { "start": "0.25", "density": 0.04 } ], "percentiles": { "p75": "0.05" } },
+      "first_contentful_paint": { "histogram": [], "percentiles": { "p75": 1700 } },
+      "experimental_time_to_first_byte": { "histogram": [], "percentiles": { "p75": 900 } }
+    },
+    "collectionPeriod": { "firstDate": { "year": 2026, "month": 8, "day": 25 }, "lastDate": { "year": 2026, "month": 9, "day": 21 } }
+  },
+  "urlNormalizationDetails": { "originalUrl": "https://www.example.test/pricing#plans", "normalizedUrl": "https://www.example.test/pricing" }
+}

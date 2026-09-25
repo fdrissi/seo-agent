@@ -1,0 +1,22 @@
+{
+  "_synthetic": true,
+  "id": "https://www.example.test/new-page",
+  "analysisUTCTimestamp": "2026-09-24T08:05:00.000Z",
+  "loadingExperience": {
+    "id": "https://www.example.test",
+    "initial_url": "https://www.example.test/new-page",
+    "overall_category": "FAST",
+    "origin_fallback": true,
+    "metrics": {
+      "FIRST_CONTENTFUL_PAINT_MS": { "percentile": 1300, "category": "FAST", "distributions": [] },
+      "INTERACTION_TO_NEXT_PAINT": { "percentile": 150, "category": "FAST", "distributions": [] }
+    }
+  },
+  "lighthouseResult": {
+    "lighthouseVersion": "13.0.0",
+    "runWarnings": ["The page loaded too slowly to finish within the time limit."],
+    "configSettings": { "formFactor": "desktop" },
+    "categories": { "performance": { "score": 0.95 }, "seo": { "score": null } },
+    "audits": { "largest-contentful-paint": { "numericValue": 1200 } }
+  }
+}

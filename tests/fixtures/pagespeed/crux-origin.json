@@ -1,0 +1,11 @@
+{
+  "_synthetic": true,
+  "record": {
+    "key": { "formFactor": "PHONE", "origin": "https://www.example.test" },
+    "metrics": {
+      "largest_contentful_paint": { "histogram": [], "percentiles": { "p75": 2400 } },
+      "cumulative_layout_shift": { "histogram": [], "percentiles": { "p75": "0.30" } }
+    },
+    "collectionPeriod": { "firstDate": { "year": 2026, "month": 8, "day": 25 }, "lastDate": { "year": 2026, "month": 9, "day": 21 } }
+  }
+}

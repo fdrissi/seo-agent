@@ -1,0 +1,12 @@
+{
+  "_synthetic": true,
+  "id": "https://www.example.test/broken",
+  "analysisUTCTimestamp": "2026-09-24T08:15:00.000Z",
+  "lighthouseResult": {
+    "lighthouseVersion": "13.0.0",
+    "runtimeError": { "code": "NO_FCP", "message": "The page did not paint any content." },
+    "runWarnings": [],
+    "categories": { "performance": { "score": 0.1 } },
+    "audits": { "first-contentful-paint": { "numericValue": 50000 } }
+  }
+}

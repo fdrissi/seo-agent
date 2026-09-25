@@ -1,0 +1,10 @@
+{
+  "_synthetic": true,
+  "error": {
+    "code": 429,
+    "message": "Quota exceeded for quota metric 'Queries' and limit 'Queries per day' of service 'pagespeedonline.googleapis.com'.",
+    "status": "RESOURCE_EXHAUSTED",
+    "errors": [ { "message": "Quota exceeded", "domain": "global", "reason": "rateLimitExceeded" } ],
+    "details": [ { "@type": "type.googleapis.com/google.rpc.ErrorInfo", "reason": "RATE_LIMIT_EXCEEDED", "metadata": { "quota_limit_value": "0" } } ]
+  }
+}
