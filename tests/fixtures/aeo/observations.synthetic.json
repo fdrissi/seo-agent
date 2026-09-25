@@ -1,0 +1,33 @@
+{
+  "_synthetic": true,
+  "_note": "SYNTHETIC fixture for tests/integration/aeo. Invented AI answers for the invented brand \"Qwertle Tools\" (qwertle.test); not real engine output.",
+  "checks": [
+    {
+      "engine": "Perplexity",
+      "query": "invoice software estonia",
+      "location": "Estonia",
+      "date": "2026-09-16T10:00:00+03:00",
+      "grounded": true,
+      "response": "Several vendors serve Estonia; see www.qwertle.test for one option.",
+      "cited_urls": [],
+      "source": "manual check"
+    },
+    {
+      "engine": "Perplexity",
+      "query": "invoice software estonia",
+      "location": "Latvia",
+      "date": "2026-09-16",
+      "grounded": false,
+      "response": null,
+      "cited_urls": null
+    },
+    {
+      "engine": "Google AI Mode",
+      "query": "qwertle pricing",
+      "date": "2026-09-17",
+      "grounded": "yes",
+      "response": "QWERTLE TOOLS offers a free tier.",
+      "cited_urls": ["https://www.qwertle.test/pricing", "https://www.qwertle.test/pricing"]
+    }
+  ]
+}

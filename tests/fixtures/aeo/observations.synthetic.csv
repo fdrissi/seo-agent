@@ -1,0 +1,9 @@
+# SYNTHETIC fixture for tests/unit/aeo and tests/integration/aeo. Invented AI answers for the invented brand "Qwertle Tools" (qwertle.test); not real engine output.
+# Columns: engine, query, prompt, location, date, timezone, grounded, response, cited_urls, source, brand_mentioned (ignored: computed in code)
+engine,query,prompt,location,date,timezone,grounded,response,cited_urls,source,brand_mentioned
+Perplexity,best invoice tool for freelancers,,Estonia,2026-09-10,,yes,"Qwertle Tools is often recommended for freelancers because it is simple.",https://www.qwertle.test/guide https://www.example.com/review,manual check,no
+Google AI Overviews,invoice tool comparison,,Estonia,2026-09-11T08:30:00Z,,yes,"Popular options include Qwertle and others.",none,manual check,no
+Bing Copilot,how to send invoices online,,,2026-09-12,Europe/Tallinn,true,"You can use a dedicated invoicing app.",https://qwertle.test/pricing?utm_source=copilot|https://www.example.org/help,visibility tool export,yes
+ChatGPT,best invoice tool for freelancers,What is the best invoice tool for freelancers?,,2026-09-13,,no,"Qwertle Tools is a good choice.",,manual check,yes
+Perplexity,invoice templates,,,2026-09-14,,yes,,,manual check,
+Perplexity,qwertle alternatives,,Estonia,2026-09-15,,yes,"Qwertleish apps exist, and so do other vendors.",https://blog.qwertle.test/post https://www.example.net/list,manual check,yes
