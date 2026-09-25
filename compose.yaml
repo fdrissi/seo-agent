@@ -1,0 +1,66 @@
+# Qdrant for seo-agent vector memory.
+#
+# Qdrant is a REBUILDABLE search index: SQLite in your private workspace is the
+# source of truth, and `npm run cli -- memory rebuild` restores every vector
+# from SQLite + the embedding cache without paid calls when the cache is
+# complete. See docs/modules/memory.md.
+#
+# Start:   docker compose up -d qdrant
+# Check:   npm run cli -- memory status --network
+# Stop:    docker compose stop qdrant
+#
+# Image pinned to the verified release (docs/integration-contracts.md section 8,
+# checked 2026-09-24): qdrant/qdrant:v1.19.1. A rootless variant also exists:
+# qdrant/qdrant:v1.19.1-unprivileged. Upgrade deliberately: re-check the
+# contract, then change the tag.
+#
+# Security defaults:
+# - Ports are bound to 127.0.0.1 ONLY. Self-hosted Qdrant has no auth or TLS
+#   by default ("anyone with network access ... can access your Qdrant
+#   container instance"). Never publish 6333/6334 on 0.0.0.0 without an API
+#   key AND TLS (or a TLS reverse proxy) AND a firewall/private network.
+# - Storage lives in your private workspace, never in this repository:
+#   ${SEO_AGENT_WORKSPACE:-~/seo-agent-workspace}/qdrant. It must be block
+#   storage with a POSIX filesystem (no NFS/S3). Docker/WSL mounts on Windows
+#   are known to cause filesystem problems; prefer a Linux path or a named
+#   volume there (see docs/modules/memory.md).
+
+name: seo-agent
+
+services:
+  qdrant:
+    image: qdrant/qdrant:v1.19.1
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:6333:6333" # REST (used by seo-agent)
+      - "127.0.0.1:6334:6334" # gRPC (not used by seo-agent; localhost only)
+    volumes:
+      - ${SEO_AGENT_WORKSPACE:-~/seo-agent-workspace}/qdrant:/qdrant/storage
+    environment:
+      QDRANT__LOG_LEVEL: INFO
+      # Disable Qdrant's anonymous usage telemetry. The QDRANT__ env prefix is
+      # verified; the `telemetry_disabled` key name is from Qdrant's config and
+      # was NOT re-verified in docs/integration-contracts.md. An unknown key is
+      # ignored, so this is safe either way; verify with the Qdrant docs.
+      QDRANT__TELEMETRY_DISABLED: "true"
+      # Optional API key (verified: QDRANT__SERVICE__API_KEY / api-key header).
+      # To require it, uncomment BOTH lines below and put the same value in
+      # QDRANT_API_KEY in <workspace>/secrets/secrets.env (never in this file):
+      #   QDRANT_API_KEY=... docker compose up -d qdrant
+      # QDRANT__SERVICE__API_KEY: ${QDRANT_API_KEY:?Set QDRANT_API_KEY to enable API-key auth}
+      # QDRANT__SERVICE__READ_ONLY_API_KEY: ${QDRANT_READ_ONLY_API_KEY:?Set QDRANT_READ_ONLY_API_KEY}
+    healthcheck:
+      # /healthz is unauthenticated and returns "healthz check passed" (verified).
+      # The image is not documented to ship curl/wget, so this uses bash's
+      # /dev/tcp (assumes bash exists in the image: UNVERIFIED). If it reports
+      # unhealthy while `memory status --network` succeeds, remove this block.
+      test:
+        - CMD-SHELL
+        - >-
+          bash -c 'exec 3<>/dev/tcp/127.0.0.1/6333 &&
+          printf "GET /healthz HTTP/1.0\r\nHost: localhost\r\n\r\n" >&3 &&
+          grep -q "healthz check passed" <&3'
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
