@@ -1,0 +1,79 @@
+# SYNTHETIC DEMO CONFIGURATION (npm run demo). Fictional business, not a real company.
+# Every domain is a reserved example domain. The demo copies this file into its own
+# isolated demo workspace (manifest kind "demo"); it is never imported into a live
+# workspace (setup --from refuses demo-profile configs there).
+schemaVersion: 1
+profile: demo
+site:
+  id: demo-widgets
+  businessName: Example Widgets (SYNTHETIC DEMO)
+  url: https://www.example.com/
+  allowedHostnames: [www.example.com]
+  urlAliases: []
+business:
+  offer: Fictional widget subscriptions for small teams (synthetic demo business).
+  targetCustomer: Fictional small teams that need dependable widgets (synthetic persona).
+  differentiators:
+    - "(SYNTHETIC) Setup guide and maintenance checklist written for small teams."
+  productFacts:
+    - id: demo-fact-setup-guide
+      statement: "(SYNTHETIC) The fictional product ships with a step-by-step setup guide."
+      source: "owner (synthetic demo fact)"
+      verifiedAt: null
+    - id: demo-fact-reporting
+      statement: "(SYNTHETIC) The fictional product includes a reporting dashboard."
+      source: "owner (synthetic demo fact)"
+      verifiedAt: null
+  approvedClaims: []
+  prohibitedClaims:
+    - "guaranteed rankings"
+market:
+  countries: []
+  languages: [en]
+  searchLocations:
+    - name: Synthetic Country (demo)
+      locationCode: 9990001
+      languageCode: en
+  devices: [desktop]
+reporting:
+  currency: USD
+  businessTimezone: America/New_York
+scheduler:
+  timezone: America/New_York
+  weekly: { enabled: false, cron: "0 7 * * 1" }
+  monthly: { enabled: false, cron: "0 8 2 * *" }
+google:
+  searchConsoleProperty: "sc-domain:example.com"
+  ga4PropertyId: "123456789"
+conversions:
+  primaryEvents:
+    - name: generate_lead
+      meaning: Demo request form submitted (synthetic)
+      kind: lead
+  secondaryEvents: []
+brand:
+  aliases: [example widgets]
+crawl:
+  protectedPaths: [/pricing]
+  excludedPaths: [/admin/]
+  maxPages: 25
+  requestDelayMs: 0
+research:
+  approvedDomains: []
+  competitors:
+    - { domain: competitor-1.example, name: Synthetic Competitor One }
+  seedTopics: [widget maintenance, choosing a widget]
+  subreddits: [examplecommunity]
+  seriousQueriesPerRun: 3
+  dataforseo: { mode: sandbox }
+  apify: { actorId: 9sHOY9RzPYGjmTHo8, build: null }
+models:
+  cheap: null
+  reasoning: null
+  embedding: null
+budgets:
+  llmGateway: { monthlyUsd: "5.00", perRunUsd: "0.50" }
+  dataforseo: { weeklyUsd: "1.00", monthlyUsd: "10.00", perRunUsd: "0.50" }
+  apify: { monthlyUsd: "10.00", perRunUsd: "1.00" }
+  combinedMonthlyUsd: "25.00"
+features: {}

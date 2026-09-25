@@ -1,0 +1,44 @@
+{
+  "_synthetic": true,
+  "_note": "SYNTHETIC empty site: the property exists but has no search data yet (new site). Used by tests/e2e/honest-status.test.ts.",
+  "defaultHostPrefix": "www.",
+  "freshness": {
+    "firstIncompleteLagDays": 2,
+    "latestLagDays": 1,
+    "partialFactorByLag": {
+      "1": 0.45,
+      "2": 0.8
+    }
+  },
+  "anonymizedShare": 0.18,
+  "propertyImpressionDedup": 0.93,
+  "countries": [
+    [
+      "usa",
+      0.55
+    ],
+    [
+      "gbr",
+      0.3
+    ],
+    [
+      "can",
+      0.15
+    ]
+  ],
+  "devices": [
+    [
+      "MOBILE",
+      0.58
+    ],
+    [
+      "DESKTOP",
+      0.38
+    ],
+    [
+      "TABLET",
+      0.04
+    ]
+  ],
+  "pages": []
+}

@@ -1,0 +1,9 @@
+{
+  "_synthetic": true,
+  "_note": "Synthetic sites.list response. Not real properties.",
+  "siteEntry": [
+    { "siteUrl": "sc-domain:example.com", "permissionLevel": "siteFullUser" },
+    { "siteUrl": "https://www.example.com/", "permissionLevel": "siteRestrictedUser" },
+    { "siteUrl": "http://legacy.example.net/", "permissionLevel": "siteUnverifiedUser" }
+  ]
+}

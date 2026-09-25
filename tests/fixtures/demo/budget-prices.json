@@ -1,0 +1,10 @@
+{
+  "_synthetic": true,
+  "_comment": "SYNTHETIC demo prices. These are NOT any provider's real prices or quotes. The offline demo uses them only to exercise the budget reserve -> reconcile path and a lowered per-run cap; nothing is sent and nothing is charged.",
+  "provider": "dataforseo",
+  "endpoint": "synthetic/priced_fixture_task",
+  "estimateUsd": "0.0020",
+  "actualUsd": "0.0015",
+  "requests": 4,
+  "loweredPerRunCapUsd": "0.0050"
+}

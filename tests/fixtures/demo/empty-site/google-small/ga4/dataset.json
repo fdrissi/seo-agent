@@ -1,0 +1,74 @@
+{
+  "_synthetic": true,
+  "_note": "SYNTHETIC small new site: a few sessions per day. Used by tests/e2e/honest-status.test.ts.",
+  "timeZone": "America/New_York",
+  "currencyCode": "USD",
+  "subjectToThresholding": true,
+  "dataLossFromOtherRow": false,
+  "freshness": {
+    "partialFactorByLag": {
+      "0": 0.35,
+      "1": 0.8
+    }
+  },
+  "userRepeatFactor": 0.3,
+  "hosts": [
+    [
+      "www.example.com",
+      1.0
+    ]
+  ],
+  "channels": [
+    {
+      "source": "google",
+      "medium": "organic",
+      "group": "Organic Search",
+      "share": 0.55
+    },
+    {
+      "source": "bing",
+      "medium": "organic",
+      "group": "Organic Search",
+      "share": 0.07
+    },
+    {
+      "source": "(direct)",
+      "medium": "(none)",
+      "group": "Direct",
+      "share": 0.25
+    },
+    {
+      "source": "newsletter.example.net",
+      "medium": "referral",
+      "group": "Referral",
+      "share": 0.13
+    }
+  ],
+  "keyEvents": [
+    "generate_lead",
+    "purchase"
+  ],
+  "eventValues": {
+    "purchase": 49.5
+  },
+  "landingPages": [
+    {
+      "path": "/",
+      "dailySessions": 3,
+      "engagedRate": 0.5,
+      "events": {
+        "page_view": 1.8,
+        "generate_lead": 0,
+        "sign_up": 0
+      }
+    }
+  ],
+  "restrictedMetrics": [],
+  "incompatibleMetrics": [],
+  "propertyQuota": {
+    "tokensPerDay": 200000,
+    "tokensPerHour": 40000,
+    "tokensPerProjectPerHour": 14000
+  },
+  "tokensPerRequest": 6
+}

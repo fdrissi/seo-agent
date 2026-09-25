@@ -1,0 +1,9 @@
+{
+  "_synthetic": true,
+  "_note": "SYNTHETIC: no URL Inspection data for the empty site.",
+  "byPath": {},
+  "default": {
+    "verdict": "NEUTRAL",
+    "coverageState": "URL is unknown to Google"
+  }
+}

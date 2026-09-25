@@ -1,0 +1,63 @@
+{
+  "_synthetic": true,
+  "_note": "SYNTHETIC empty site: the GA4 property exists but has recorded no sessions yet. Used by tests/e2e/honest-status.test.ts.",
+  "timeZone": "America/New_York",
+  "currencyCode": "USD",
+  "subjectToThresholding": true,
+  "dataLossFromOtherRow": false,
+  "freshness": {
+    "partialFactorByLag": {
+      "0": 0.35,
+      "1": 0.8
+    }
+  },
+  "userRepeatFactor": 0.3,
+  "hosts": [
+    [
+      "www.example.com",
+      1.0
+    ]
+  ],
+  "channels": [
+    {
+      "source": "google",
+      "medium": "organic",
+      "group": "Organic Search",
+      "share": 0.55
+    },
+    {
+      "source": "bing",
+      "medium": "organic",
+      "group": "Organic Search",
+      "share": 0.07
+    },
+    {
+      "source": "(direct)",
+      "medium": "(none)",
+      "group": "Direct",
+      "share": 0.25
+    },
+    {
+      "source": "newsletter.example.net",
+      "medium": "referral",
+      "group": "Referral",
+      "share": 0.13
+    }
+  ],
+  "keyEvents": [
+    "generate_lead",
+    "purchase"
+  ],
+  "eventValues": {
+    "purchase": 49.5
+  },
+  "landingPages": [],
+  "restrictedMetrics": [],
+  "incompatibleMetrics": [],
+  "propertyQuota": {
+    "tokensPerDay": 200000,
+    "tokensPerHour": 40000,
+    "tokensPerProjectPerHour": 14000
+  },
+  "tokensPerRequest": 6
+}
