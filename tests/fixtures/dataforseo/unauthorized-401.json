@@ -1,0 +1,11 @@
+{
+  "_synthetic": true,
+  "_comment": "SYNTHETIC copy of the documented 401 body shape (DF41/DF42: no version key, status_code 40100).",
+  "status_code": 40100,
+  "status_message": "You are not Authorized to Access this Resource. (synthetic)",
+  "time": "0 sec.",
+  "cost": 0,
+  "tasks_count": 0,
+  "tasks_error": 0,
+  "tasks": []
+}

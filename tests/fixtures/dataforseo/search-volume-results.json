@@ -1,0 +1,9 @@
+{
+  "_synthetic": true,
+  "_comment": "SYNTHETIC per-keyword values used to build responses shaped like keywords_data/google_ads/search_volume task_get/live (DF18/DF19). A null search_volume means the provider returned no volume (missing, never 0).",
+  "keywords": {
+    "synthetic widget pricing": { "search_volume": 1300, "competition": "MEDIUM", "competition_index": 42, "cpc": 1.25, "low_top_of_page_bid": 0.5, "high_top_of_page_bid": 2.1, "monthly_searches": [{ "year": 2026, "month": 8, "search_volume": 1200 }, { "year": 2026, "month": 7, "search_volume": 1400 }] },
+    "synthetic gadget review": { "search_volume": null, "competition": null, "competition_index": null, "cpc": null, "low_top_of_page_bid": null, "high_top_of_page_bid": null, "monthly_searches": null }
+  },
+  "default": { "search_volume": 90, "competition": "LOW", "competition_index": 5, "cpc": null, "low_top_of_page_bid": null, "high_top_of_page_bid": null, "monthly_searches": [] }
+}

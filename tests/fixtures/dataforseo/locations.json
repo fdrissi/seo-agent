@@ -1,0 +1,29 @@
+{
+  "_synthetic": true,
+  "_comment": "SYNTHETIC lookup list shaped like GET v3/serp/google/locations (DF11). Codes 999000x are fake.",
+  "version": "0.1.synthetic",
+  "status_code": 20000,
+  "status_message": "Ok.",
+  "time": "0 sec.",
+  "cost": 0,
+  "tasks_count": 1,
+  "tasks_error": 0,
+  "tasks": [
+    {
+      "id": "00000000-0000-4000-8000-00000000a001",
+      "status_code": 20000,
+      "status_message": "Ok.",
+      "cost": 0,
+      "result_count": 5,
+      "path": ["v3", "serp", "google", "locations"],
+      "data": { "api": "serp", "function": "locations", "se": "google" },
+      "result": [
+        { "location_code": 9990001, "location_name": "Synthetic Country", "location_code_parent": null, "country_iso_code": "XA", "location_type": "Country" },
+        { "location_code": 9990002, "location_name": "Synthetic City,Synthetic Country", "location_code_parent": 9990001, "country_iso_code": "XA", "location_type": "City" },
+        { "location_code": 9990003, "location_name": "Twin Town", "location_code_parent": 9990001, "country_iso_code": "XA", "location_type": "City" },
+        { "location_code": 9990004, "location_name": "Twin Town", "location_code_parent": 9990001, "country_iso_code": "XA", "location_type": "Municipality" },
+        { "location_code": 9990005, "location_name": "Other Synthetic Country", "location_code_parent": null, "country_iso_code": "XB", "location_type": "Country" }
+      ]
+    }
+  ]
+}

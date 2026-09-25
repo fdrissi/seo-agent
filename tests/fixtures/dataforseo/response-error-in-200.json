@@ -1,0 +1,12 @@
+{
+  "_synthetic": true,
+  "_comment": "SYNTHETIC: HTTP 200 with a RESPONSE-level error (DF13). 40210 insufficient funds; no tasks created.",
+  "version": "0.1.synthetic",
+  "status_code": 40210,
+  "status_message": "You don't have enough funds to perform this request.",
+  "time": "0 sec.",
+  "cost": 0,
+  "tasks_count": 0,
+  "tasks_error": 0,
+  "tasks": []
+}

@@ -1,0 +1,26 @@
+{
+  "_synthetic": true,
+  "_comment": "SYNTHETIC lookup list shaped like GET v3/serp/google/languages (DF12).",
+  "version": "0.1.synthetic",
+  "status_code": 20000,
+  "status_message": "Ok.",
+  "time": "0 sec.",
+  "cost": 0,
+  "tasks_count": 1,
+  "tasks_error": 0,
+  "tasks": [
+    {
+      "id": "00000000-0000-4000-8000-00000000a002",
+      "status_code": 20000,
+      "status_message": "Ok.",
+      "cost": 0,
+      "result_count": 2,
+      "path": ["v3", "serp", "google", "languages"],
+      "data": { "api": "serp", "function": "languages", "se": "google" },
+      "result": [
+        { "language_name": "English", "language_code": "en" },
+        { "language_name": "Synthetic Language", "language_code": "xx" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "_synthetic": true,
+  "_comment": "SYNTHETIC template of one task entry in a POST v3/serp/google/organic/task_post response (DF4): top level 20000, task 20100 Task Created.",
+  "version": "0.1.synthetic",
+  "status_code": 20000,
+  "status_message": "Ok.",
+  "time": "0.0818 sec.",
+  "cost": 0.0006,
+  "tasks_count": 1,
+  "tasks_error": 0,
+  "tasks": [
+    { "id": "__TASK_ID__", "status_code": 20100, "status_message": "Task Created.", "time": "0.0060 sec.", "cost": 0.0006, "result_count": 0, "path": ["v3", "serp", "google", "organic", "task_post"], "data": { "api": "serp", "function": "task_post", "se": "google", "se_type": "organic" }, "result": null }
+  ]
+}

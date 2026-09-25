@@ -1,0 +1,14 @@
+{
+  "_synthetic": true,
+  "_comment": "SYNTHETIC response shaped like GET v3/appendix/user_data (DF15). The login field is fake and must never be printed.",
+  "version": "0.1.synthetic",
+  "status_code": 20000,
+  "status_message": "Ok.",
+  "time": "0 sec.",
+  "cost": 0,
+  "tasks_count": 1,
+  "tasks_error": 0,
+  "tasks": [
+    { "id": "00000000-0000-4000-8000-00000000a003", "status_code": 20000, "status_message": "Ok.", "cost": 0, "result_count": 1, "path": ["v3", "appendix", "user_data"], "data": { "api": "appendix", "function": "user_data" }, "result": [{ "login": "__LOGIN__", "timezone": "UTC", "money": { "total": 50, "balance": 12.3456, "limits": {}, "statistics": {} } }] }
+  ]
+}

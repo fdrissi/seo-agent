@@ -1,0 +1,14 @@
+{
+  "_synthetic": true,
+  "_comment": "SYNTHETIC: HTTP 200 with a task-level error (DF13: errors arrive inside HTTP 200). 40501 Invalid Field.",
+  "version": "0.1.synthetic",
+  "status_code": 20000,
+  "status_message": "Ok.",
+  "time": "0.0300 sec.",
+  "cost": 0,
+  "tasks_count": 1,
+  "tasks_error": 1,
+  "tasks": [
+    { "id": "__TASK_ID__", "status_code": 40501, "status_message": "Invalid Field: 'language_code'.", "time": "0 sec.", "cost": 0, "result_count": 0, "path": ["v3", "serp", "google", "organic", "task_post"], "data": { "api": "serp", "function": "task_post", "se": "google", "se_type": "organic" }, "result": null }
+  ]
+}
