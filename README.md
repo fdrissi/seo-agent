@@ -1,5 +1,9 @@
 # seo-agent
 
+> **AI agents: start with [SKILL.md](SKILL.md).** It tells you how to operate
+> seo-agent for a user: commands, workflows, and the safety rules (secrets,
+> spending, human approvals). To change the code, read [AGENTS.md](AGENTS.md).
+
 A self-hosted, local-first SEO, AEO (answer-engine optimization), and content
 intelligence agent. It measures your website with first-party data, checks
 that the data is trustworthy, routes each page through deterministic rules,
@@ -13,8 +17,8 @@ MEASURE -> VALIDATE DATA -> ROUTE -> PRIORITIZE -> RESEARCH -> PROPOSE
 ```
 
 > **Status: version 0.1.0, pre-release.** Every integration is implemented
-> and tested offline against synthetic fixtures (296 offline test files with
-> 3390 tests, all passing on 2026-09-25 on Node.js 24 and 26). **No
+> and tested offline against synthetic fixtures (297 offline test files with
+> 3395 tests, all passing on 2026-09-25 on Node.js 24 and 26). **No
 > integration has been tested live with real credentials**: not Google, the
 > LLM Gateway, DataForSEO, Apify, PageSpeed/CrUX, or a running Qdrant. The
 > first live run may surface response details the fixtures do not model.

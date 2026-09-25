@@ -28,11 +28,11 @@ of fixes:
 
 - `npx tsc -p tsconfig.json --noEmit` (TypeScript 7.0.2): no errors, on
   Node.js v26.3.0 and v24.21.0.
-- The full offline suite, `npx vitest run`: 296 test files and 3390 tests,
+- The full offline suite, `npx vitest run`: 297 test files and 3395 tests,
   all passed, in about 92 seconds, on Node.js v26.3.0. The same suite also
   passed on Node.js v24.21.0 (the Active LTS line that `.nvmrc` targets):
   `PATH=$HOME/.nvm/versions/node/v24.21.0/bin:$PATH node node_modules/vitest/vitest.mjs run`,
-  296 test files and 3390 tests, about 92 seconds. No test was skipped on
+  297 test files and 3395 tests, about 92 seconds. No test was skipped on
   this machine; on a case-sensitive filesystem (for example Linux CI) the
   letter-case path tests skip themselves. The run environment
   matters for the timing-sensitive end-to-end tests. It was macOS 26.6.2

@@ -521,7 +521,7 @@ Every bullet of section 31, split into its parts.
 | ID | Requirement | Implementation | Evidence | Status |
 | --- | --- | --- | --- | --- |
 | 32.1 | Tested vertical slices 1-7 | `docs/modules/*.md` (one per slice) | slice test suites | Tested |
-| 32.2 | Not only a folder tree | full implementation | 296 test files, 3390 tests, all passing on 2026-09-25 after the fourth round of fixes, on Node.js v26.3.0 and v24.21.0 (environment and conditions in `docs/FEATURE_STATUS.md`) | Tested |
+| 32.2 | Not only a folder tree | full implementation | 297 test files, 3395 tests, all passing on 2026-09-25 after the fourth round of fixes, on Node.js v26.3.0 and v24.21.0 (environment and conditions in `docs/FEATURE_STATUS.md`) | Tested |
 | 32.3 | Feature-status matrix with the four statuses | `docs/FEATURE_STATUS.md` | review | Documented |
 | 32.4 | Without credentials, finish everything testable offline with precise next steps; no TODO behind a successful mock; no "production-ready" claims | status commands and `doctor` next steps; `docs/FEATURE_STATUS.md` | `e2e/honest-status.test.ts`; `integration/setup/doctor.test.ts` | Tested |
 | 32.5 | Completion report (files, commands, tests, issues, access, first-run sequence) | `README.md` (first run), `docs/FEATURE_STATUS.md` (access still required) | review | Documented |

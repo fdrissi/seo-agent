@@ -20,6 +20,7 @@
     ".env.example",
     "compose.yaml",
     "README.md",
+    "SKILL.md",
     "CHANGELOG.md",
     "THIRD_PARTY_NOTICES.md",
     "docs/",
@@ -53,7 +54,7 @@
     "approvals": "tsx src/cli/main.ts approvals list",
     "export": "tsx src/cli/main.ts export",
     "backup": "tsx src/cli/main.ts backup",
-    "security:scan":"node scripts/scan-secrets.mjs",
+    "security:scan": "node scripts/scan-secrets.mjs",
     "licenses:check": "node scripts/check-licenses.mjs",
     "release:check": "node scripts/release-check.mjs"
   },
