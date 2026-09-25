@@ -1,0 +1,49 @@
+# Code owners: changes to these paths require review from the maintainer.
+#
+# OWNER ACTION REQUIRED: replace every "@OWNER" with the maintainer's GitHub
+# handle (or a team such as @org/maintainers) BEFORE the repository is public,
+# then enable branch protection with "Require review from Code Owners".
+# `npm run release:check` warns while the placeholder is still present.
+#
+# Sensitive areas (see AGENTS.md and docs/SECURITY_MODEL.md): CI workflows,
+# authentication, approvals, publishing/export, budget enforcement (including
+# paid provider adapters and workflow budget pre-flight), security helpers,
+# release tooling and the secret-scan allowlist, schema migrations, and
+# dependency manifests.
+
+/.github/                         @OWNER
+/.github/workflows/               @OWNER
+/.github/CODEOWNERS               @OWNER
+
+/src/auth/                        @OWNER
+/src/approvals/                   @OWNER
+/src/budgets/                     @OWNER
+# Paid provider adapters call budgets.reserve / requests.prepare: a change here
+# can bypass budget enforcement without touching src/budgets.
+/src/integrations/                @OWNER
+# Workflow budget pre-flight and job orchestration (paid runs, approvals).
+/src/workflows/                   @OWNER
+/src/jobs/                        @OWNER
+/src/security/                    @OWNER
+/src/config/secrets.ts            @OWNER
+/src/config/env.ts                @OWNER
+
+# Publishing and export paths (publisher adapters, manual export, mark-implemented)
+**/publish*                       @OWNER
+**/publisher*                     @OWNER
+**/export*                        @OWNER
+/src/cli/commands/approvals.ts    @OWNER
+
+/scripts/                         @OWNER
+/migrations/                      @OWNER
+/prompts/                         @OWNER
+
+/package.json                     @OWNER
+/package-lock.json                @OWNER
+/Dockerfile                       @OWNER
+/compose.yaml                     @OWNER
+/.dockerignore                    @OWNER
+/.gitignore                       @OWNER
+
+/SECURITY.md                      @OWNER
+/LICENSE-NOTICE.md                @OWNER

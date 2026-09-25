@@ -1,0 +1,26 @@
+# Dependency update PRs. They run through the same public CI (fixtures only,
+# no secrets) and need normal review; nothing is merged or deployed automatically.
+# `cooldown` delays updates for newly published versions, matching the
+# min-release-age supply-chain hardening described in docs/SECURITY_MODEL.md.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    cooldown:
+      default-days: 7
+    groups:
+      development-dependencies:
+        dependency-type: development
+    labels: [dependencies]
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    cooldown:
+      default-days: 7
+    labels: [dependencies, ci]

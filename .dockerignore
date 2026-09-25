@@ -1,0 +1,36 @@
+# Allowlist: only what a container build needs. Everything else is excluded,
+# so private workspaces, credentials, vaults, and databases cannot enter an image.
+*
+!package.json
+!package-lock.json
+!tsconfig.json
+!tsconfig.build.json
+!src/**
+!migrations/**
+# The build-stamp script `npm run build` runs (dist/build-info.json). Only this file:
+# the rest of scripts/ is release tooling the image does not need.
+!scripts/write-build-info.mjs
+!prompts/**
+!vault/_template/**
+!config/sites/example.site.yaml
+!THIRD_PARTY_NOTICES.md
+!LICENSE
+!README.md
+# SYNTHETIC fixtures the demo and the Demo profile read at runtime
+# (appDirs.fixtures() = <app>/tests/fixtures: demo/, google/, pipelines/site/).
+# They are labeled synthetic and use reserved example domains only.
+!tests/fixtures/**
+
+# Deny rules last (last match wins): never ship secrets or databases even if
+# they appear inside an allowlisted directory.
+**/.env
+**/.env.*
+**/secrets/
+**/secrets.env
+**/*.sqlite
+**/*.sqlite-*
+**/*.db
+**/*.pem
+**/*.key
+**/*client_secret*.json
+**/*service-account*.json

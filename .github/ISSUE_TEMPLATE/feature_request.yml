@@ -1,0 +1,40 @@
+name: Feature request
+description: Suggest an improvement. Keep examples synthetic (example.com / *.test) and never include secrets.
+labels: [enhancement, triage]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        seo-agent is self-hosted and local-first: each installation uses its own accounts, credentials, and budgets,
+        and there is no maintainer-hosted backend. Proposals that add a hosted service, shared credentials, telemetry,
+        automatic publishing without approval, or paid calls without budgets will not be accepted.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What are you trying to achieve, and what gets in the way today?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: Include the evidence, data source, or verified provider documentation this would rely on.
+    validations:
+      required: true
+  - type: textarea
+    id: costs
+    attributes:
+      label: Cost, privacy, and safety impact
+      description: Does it call a paid API, send new data to a third party, touch production systems, or need an approval gate?
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Before submitting
+      options:
+        - label: This request contains no secrets or private data.
+          required: true

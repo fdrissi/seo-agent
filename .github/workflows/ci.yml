@@ -1,0 +1,118 @@
+# Public CI for seo-agent.
+#
+# Security rules (see docs/SECURITY_MODEL.md and docs/RELEASING.md):
+# - Least privilege: the workflow token can only read repository contents.
+# - Triggers are push and pull_request. NEVER pull_request_target: it runs with a
+#   write-capable token and secrets in the context of the base repository.
+# - No repository secrets or production credentials are referenced. Tests are
+#   offline and use synthetic fixtures only; live/paid tests are opt-in locally.
+# - GitHub-hosted runners only. Untrusted contributor code must never run on the
+#   owner's machines or production runner, so no self-hosted runners.
+# - Dependencies are installed with --ignore-scripts (no install-time code).
+# - TODO(owner): pin every action to a verified full commit SHA (see
+#   docs/RELEASING.md "Pinning GitHub Actions"). Tags are used until then
+#   because the SHAs could not be verified offline when this file was written.
+
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+env:
+  CI: 'true'
+  # Belt and braces: the application must never find a workspace or credentials in CI.
+  SEO_AGENT_WORKSPACE: /tmp/seo-agent-ci-workspace-does-not-exist
+  npm_config_ignore_scripts: 'true'
+  npm_config_audit: 'false'
+  npm_config_fund: 'false'
+
+jobs:
+  test:
+    name: typecheck + tests (Node ${{ matrix.node }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    # Node 26 is "Current" until it becomes LTS (scheduled 2026-10-28); its failures are informational.
+    continue-on-error: ${{ matrix.experimental }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - node: '24'
+            experimental: false
+          - node: '26'
+            experimental: true
+    steps:
+      - name: Check out
+        uses: actions/checkout@v5 # TODO(owner): pin to full commit SHA
+        with:
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v5 # TODO(owner): pin to full commit SHA
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+
+      - name: Install dependencies (lockfile only, no install scripts)
+        run: npm ci --ignore-scripts --no-audit --no-fund
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Test (offline, synthetic fixtures)
+        run: npm test
+
+  security:
+    name: secret scan, licenses, release check
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out (full history for the secret scan)
+        uses: actions/checkout@v5 # TODO(owner): pin to full commit SHA
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v5 # TODO(owner): pin to full commit SHA
+        with:
+          node-version: '24'
+          cache: npm
+
+      - name: Install dependencies (lockfile only, no install scripts)
+        run: npm ci --ignore-scripts --no-audit --no-fund
+
+      - name: Show secret-scan allowlist/rule changes (review them; they can hide findings)
+        if: github.event_name == 'pull_request'
+        env:
+          BASE_REF: ${{ github.base_ref }}
+        run: |
+          files="scripts/secret-scan-allowlist.json scripts/lib/secret-rules.mjs scripts/scan-secrets.mjs"
+          if git diff --quiet "origin/${BASE_REF}...HEAD" -- $files; then
+            echo "Secret-scan allowlist and rules are unchanged in this pull request."
+          else
+            echo "::warning title=Secret-scan configuration changed::This pull request changes the secret-scan allowlist or rules. A code owner must review the diff below."
+            git diff --stat "origin/${BASE_REF}...HEAD" -- $files
+            git diff "origin/${BASE_REF}...HEAD" -- $files
+          fi
+
+      - name: Secret scan (working tree + full Git history; never prints values; fails on a shallow clone)
+        run: npm run security:scan
+
+      - name: Dependency license check (+ THIRD_PARTY_NOTICES.md freshness)
+        run: npm run licenses:check -- --check
+
+      - name: Build (so the release check sees the real package contents)
+        run: npm run build
+
+      - name: Release check (read-only; never publishes)
+        run: npm run release:check

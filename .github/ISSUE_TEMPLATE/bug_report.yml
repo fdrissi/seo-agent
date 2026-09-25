@@ -1,0 +1,108 @@
+name: Bug report
+description: Report a reproducible problem. Never paste secrets, tokens, credentials, or private data.
+labels: [bug, triage]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Do not paste secrets.** Never include API keys, OAuth client files, refresh or access tokens, passwords,
+        `secrets.env` contents, service-account JSON, `Authorization` headers, or cookies. If you already posted one,
+        **rotate it at the provider immediately**; deleting the comment does not un-expose it.
+
+        **Do not paste private data** such as real hostnames you do not want public, Search Console properties,
+        GA4 property IDs, analytics numbers, customer data, vault notes, or raw API responses.
+
+        **Security vulnerabilities:** do not open a public issue. Follow [SECURITY.md](../blob/main/SECURITY.md).
+
+        To collect safe context, run `npm run cli -- diagnostics export`. It writes a **redacted** bundle
+        (JSON + Markdown) to `<workspace>/diagnostics/` and never uploads anything. **Inspect it** before attaching.
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: What did you run, what did you expect, and what happened instead?
+      placeholder: "I ran `npm run cli -- weekly --dry-run` and expected ... but got ..."
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      description: Prefer the synthetic demo (`npm run demo`) or synthetic data with example.com / *.test domains.
+      placeholder: |
+        1. npm run demo
+        2. npm run cli -- ...
+    validations:
+      required: true
+  - type: textarea
+    id: output
+    attributes:
+      label: Relevant output (redacted)
+      description: CLI output is redacted by seo-agent, but review it yourself before pasting. Shell-formatted automatically.
+      render: shell
+  - type: input
+    id: version
+    attributes:
+      label: seo-agent version
+      description: "`npm run cli -- --version`"
+    validations:
+      required: true
+  - type: dropdown
+    id: node
+    attributes:
+      label: Node.js version
+      options: ['24 (LTS)', '26', 'other (please state in the description)']
+    validations:
+      required: true
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating system
+      options: [macOS, Linux, Windows, container (Dockerfile), other]
+    validations:
+      required: true
+  - type: dropdown
+    id: profile
+    attributes:
+      label: Setup profile
+      options: [demo, core, full]
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Affected area(s)
+      multiple: true
+      options:
+        - setup / doctor / workspace
+        - Google auth / Search Console / GA4
+        - crawler / technical checks
+        - LLM Gateway / prompts
+        - DataForSEO
+        - Apify
+        - Qdrant / memory
+        - Obsidian vault
+        - budgets / costs
+        - approvals / export / publishing
+        - reports / dashboard
+        - jobs / scheduling
+        - security / diagnostics / release tooling
+        - documentation
+  - type: textarea
+    id: diagnostics
+    attributes:
+      label: Redacted diagnostics (optional)
+      description: Paste or attach only the parts of the diagnostics Markdown summary you have inspected and are comfortable sharing.
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Before submitting
+      options:
+        - label: This report contains no API keys, tokens, passwords, OAuth/service-account files, cookies, or Authorization headers.
+          required: true
+        - label: This report contains no private data I do not want public (hostnames, property IDs, analytics, customer data, vault notes, raw responses).
+          required: true
+        - label: If I attached diagnostics, I generated them with `diagnostics export` (redacted) and inspected them first.
+          required: false
+        - label: This is not a security vulnerability (those go through SECURITY.md, not public issues).
+          required: true
