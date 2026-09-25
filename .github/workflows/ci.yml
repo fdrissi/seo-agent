@@ -57,7 +57,7 @@ jobs:
           persist-credentials: false
 
       - name: Set up Node.js
-        uses: actions/setup-node@v5 # TODO(owner): pin to full commit SHA
+        uses: actions/setup-node@v7 # TODO(owner): pin to full commit SHA
         with:
           node-version: ${{ matrix.node }}
           cache: npm
@@ -83,7 +83,7 @@ jobs:
           persist-credentials: false
 
       - name: Set up Node.js
-        uses: actions/setup-node@v5 # TODO(owner): pin to full commit SHA
+        uses: actions/setup-node@v7 # TODO(owner): pin to full commit SHA
         with:
           node-version: '24'
           cache: npm
