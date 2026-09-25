@@ -324,8 +324,12 @@ uploaded. CI runs on GitHub-hosted runners with the repository contents only.
 
 1. ~~Choose a license and apply it~~: done, MIT (`LICENSE`, recorded in `LICENSE-NOTICE.md`).
 2. ~~Replace the owner placeholders~~: done (`@fdrissi`, `fdrissi/seo-agent`,
-   GitHub private vulnerability reporting in `SECURITY.md`). Still to do in the
-   GitHub settings: branch protection with code-owner review.
+   GitHub private vulnerability reporting in `SECURITY.md`). Branch protection
+   is on: the "Protect main" repository ruleset blocks direct pushes, force
+   pushes, and deletion of `main`, and requires a pull request with code-owner
+   approval plus passing `typecheck + tests (Node 24)` and
+   `secret scan, licenses, release check` checks. Admins can bypass only
+   through a pull request.
 3. Pin actions and the base image (`docs/RELEASING.md`).
 4. Run `npm run release:check -- --strict` and approve any public action
    explicitly.
