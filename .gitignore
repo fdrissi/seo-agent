@@ -1,0 +1,64 @@
+# NOTE: this file previously contained only "*.md", which would have excluded
+# README.md, docs/, prompts/, and vault templates from version control. It was
+# narrowed to the original intent (keeping the private build spec untracked).
+/specs/
+
+# Dependencies and build output
+node_modules/
+dist/
+coverage/
+*.tsbuildinfo
+
+# Private runtime data never belongs in the source repository.
+# The default workspace lives outside the repo (see docs/WORKSPACE.md).
+.env
+.env.*
+!.env.example
+/secrets/
+/workspace/
+/seo-agent-workspace/
+/demo-workspace/
+/data/*
+!/data/README.md
+/exports/*
+!/exports/README.md
+/vault/*
+!/vault/README.md
+!/vault/_template/
+/config/sites/*
+!/config/sites/README.md
+!/config/sites/example.site.yaml
+*.sqlite
+*.sqlite-*
+*.db
+*.db-*
+qdrant_storage/
+/logs/
+/backups/
+/reports/
+/diagnostics/
+/qdrant/
+*.log
+
+# Credentials that must never be committed (anywhere in the tree)
+*client_secret*.json
+*service-account*.json
+*credentials*.json
+*token*.json
+secrets.env
+**/secrets/
+*.pem
+*.key
+# Synthetic, labeled fixtures are allowed (scanned by npm run security:scan)
+!tests/fixtures/**/*.json
+
+# Browser artifacts and raw responses
+playwright-report/
+test-results/
+/raw/
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
+.obsidian/workspace*.json

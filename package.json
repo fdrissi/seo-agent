@@ -1,0 +1,77 @@
+{
+  "name": "seo-agent",
+  "version": "0.1.0",
+  "description": "Self-hosted, local-first SEO, AEO, and content intelligence agent with evidence-backed recommendations and human approval gates.",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "bin": {
+    "seo-agent": "dist/cli/main.js"
+  },
+  "files": [
+    "dist/",
+    "migrations/",
+    "prompts/",
+    "vault/_template/",
+    "config/sites/example.site.yaml",
+    ".env.example",
+    "compose.yaml",
+    "README.md",
+    "CHANGELOG.md",
+    "THIRD_PARTY_NOTICES.md",
+    "docs/",
+    "tests/fixtures/"
+  ],
+  "scripts": {
+    "cli": "tsx src/cli/main.ts",
+    "build": "tsc -p tsconfig.build.json && node scripts/write-build-info.mjs",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run",
+    "test:unit": "vitest run tests/unit",
+    "test:integration": "vitest run tests/integration",
+    "test:e2e": "vitest run tests/e2e",
+    "test:watch": "vitest",
+    "check": "npm run typecheck && npm test",
+    "demo": "tsx src/cli/main.ts demo",
+    "doctor": "tsx src/cli/main.ts doctor",
+    "setup": "tsx src/cli/main.ts setup",
+    "init-workspace": "tsx src/cli/main.ts init",
+    "baseline": "tsx src/cli/main.ts baseline",
+    "weekly": "tsx src/cli/main.ts weekly",
+    "monthly": "tsx src/cli/main.ts monthly",
+    "costs": "tsx src/cli/main.ts costs",
+    "sync:gsc": "tsx src/cli/main.ts sync gsc",
+    "sync:ga4": "tsx src/cli/main.ts sync ga4",
+    "crawl": "tsx src/cli/main.ts crawl",
+    "memory:sync": "tsx src/cli/main.ts memory sync",
+    "memory:search": "tsx src/cli/main.ts memory search",
+    "jobs": "tsx src/cli/main.ts jobs list",
+    "jobs:resume": "tsx src/cli/main.ts jobs resume",
+    "approvals": "tsx src/cli/main.ts approvals list",
+    "export": "tsx src/cli/main.ts export",
+    "backup": "tsx src/cli/main.ts backup",
+    "security:scan":"node scripts/scan-secrets.mjs",
+    "licenses:check": "node scripts/check-licenses.mjs",
+    "release:check": "node scripts/release-check.mjs"
+  },
+  "dependencies": {
+    "cheerio": "1.2.0",
+    "commander": "15.0.0",
+    "croner": "10.0.1",
+    "fast-xml-parser": "5.11.1",
+    "google-auth-library": "11.0.2",
+    "robots-parser": "3.0.1",
+    "undici": "8.10.2",
+    "yaml": "2.9.1",
+    "zod": "4.6.5"
+  },
+  "devDependencies": {
+    "@types/node": "24.13.5",
+    "tsx": "4.23.13",
+    "typescript": "7.0.2",
+    "vitest": "5.0.1"
+  }
+}
