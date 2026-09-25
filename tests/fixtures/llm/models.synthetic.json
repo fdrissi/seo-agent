@@ -1,0 +1,146 @@
+{
+  "_synthetic": true,
+  "_note": "SYNTHETIC fixture shaped like the verified LLM Gateway GET /v1/models response (docs/integration-contracts.md section 1). Model ids, providers, and prices are invented for tests and are NOT real catalog data.",
+  "data": [
+    {
+      "id": "synthetic-cheap-structured",
+      "name": "Synthetic Cheap Structured",
+      "display_name": "Synthetic Cheap Structured",
+      "aliases": ["synthetic-cheap-latest"],
+      "created": 1767225600,
+      "family": "synthetic",
+      "architecture": { "input_modalities": ["text"], "output_modalities": ["text"], "tokenizer": "synthetic" },
+      "top_provider": { "is_moderated": false },
+      "providers": [
+        { "providerId": "prov-a", "externalId": "cheap-structured", "pricing": { "prompt": "0.15e-6", "completion": "0.6e-6" }, "streaming": true, "vision": false, "cancellation": true, "tools": true, "parallelToolCalls": false, "reasoning": false, "max_output": 16384 }
+      ],
+      "pricing": { "prompt": "0.15e-6", "completion": "0.6e-6" },
+      "context_length": 128000,
+      "max_output": 16384,
+      "supported_parameters": ["temperature", "max_tokens", "response_format", "tools", "tool_choice", "top_p"],
+      "json_output": true,
+      "structured_outputs": true,
+      "free": false,
+      "stability": "stable",
+      "future_field_ignored": { "anything": true }
+    },
+    {
+      "id": "synthetic-json-only",
+      "name": "Synthetic JSON Mode Only",
+      "display_name": "Synthetic JSON Mode Only",
+      "family": "synthetic",
+      "architecture": { "input_modalities": ["text"], "output_modalities": ["text"], "tokenizer": "synthetic" },
+      "top_provider": { "is_moderated": false },
+      "providers": [
+        { "providerId": "prov-a", "externalId": "json-only", "pricing": { "prompt": "1.0e-6", "completion": "2.0e-6" }, "streaming": true, "vision": false, "cancellation": true, "tools": false, "parallelToolCalls": false, "reasoning": false }
+      ],
+      "pricing": { "prompt": "1.0e-6", "completion": "2.0e-6" },
+      "context_length": 32000,
+      "max_output": 4096,
+      "supported_parameters": ["temperature", "max_tokens", "response_format"],
+      "json_output": true,
+      "structured_outputs": false
+    },
+    {
+      "id": "synthetic-plain",
+      "name": "Synthetic Plain Text",
+      "display_name": "Synthetic Plain Text",
+      "family": "synthetic",
+      "architecture": { "input_modalities": ["text"], "output_modalities": ["text"], "tokenizer": "synthetic" },
+      "top_provider": { "is_moderated": false },
+      "providers": [
+        { "providerId": "prov-b", "externalId": "plain", "pricing": { "prompt": "0.5e-6", "completion": "1.5e-6" }, "streaming": true, "vision": false, "cancellation": false, "tools": false, "parallelToolCalls": false, "reasoning": false }
+      ],
+      "pricing": { "prompt": "0.5e-6", "completion": "1.5e-6" },
+      "context_length": 16000,
+      "max_output": 2048,
+      "supported_parameters": ["max_tokens"],
+      "json_output": false,
+      "structured_outputs": false
+    },
+    {
+      "id": "synthetic-reasoner",
+      "name": "Synthetic Reasoner",
+      "display_name": "Synthetic Reasoner",
+      "family": "synthetic",
+      "architecture": { "input_modalities": ["text"], "output_modalities": ["text"], "tokenizer": "synthetic" },
+      "top_provider": { "is_moderated": false },
+      "providers": [
+        { "providerId": "prov-a", "externalId": "reasoner", "pricing": { "prompt": "2.0e-6", "completion": "8.0e-6" }, "streaming": true, "vision": false, "cancellation": true, "tools": true, "parallelToolCalls": false, "reasoning": true, "reasoning_efforts": ["low", "medium", "high"], "max_output": 32000 }
+      ],
+      "pricing": { "prompt": "2.0e-6", "completion": "8.0e-6" },
+      "context_length": 200000,
+      "max_output": 32000,
+      "supported_parameters": ["max_tokens", "response_format", "tools", "reasoning_effort", "reasoning"],
+      "json_output": true,
+      "structured_outputs": true
+    },
+    {
+      "id": "synthetic-unpriced",
+      "name": "Synthetic Model Without A Verifiable Price",
+      "display_name": "Synthetic Unpriced",
+      "family": "synthetic",
+      "architecture": { "input_modalities": ["text"], "output_modalities": ["text"], "tokenizer": "synthetic" },
+      "top_provider": { "is_moderated": false },
+      "providers": [
+        { "providerId": "prov-c", "externalId": "unpriced", "pricing": { "prompt": "", "completion": "" }, "streaming": true, "vision": false, "cancellation": false, "tools": false, "parallelToolCalls": false, "reasoning": false }
+      ],
+      "pricing": { "prompt": "", "completion": "" },
+      "context_length": 32000,
+      "max_output": 4096,
+      "supported_parameters": ["max_tokens", "temperature", "response_format"],
+      "json_output": true,
+      "structured_outputs": true
+    },
+    {
+      "id": "synthetic-embed-small",
+      "name": "Synthetic Embedding Small",
+      "display_name": "Synthetic Embedding Small",
+      "family": "synthetic",
+      "architecture": { "input_modalities": ["text"], "output_modalities": ["embedding"], "tokenizer": "synthetic" },
+      "top_provider": { "is_moderated": false },
+      "providers": [
+        { "providerId": "prov-a", "externalId": "embed-small", "pricing": { "prompt": "0.02e-6", "completion": "0" }, "streaming": false, "vision": false, "cancellation": false, "tools": false, "parallelToolCalls": false, "reasoning": false }
+      ],
+      "pricing": { "prompt": "0.02e-6", "completion": "0" },
+      "context_length": 8192,
+      "supported_parameters": ["temperature", "tools"],
+      "json_output": false,
+      "structured_outputs": false
+    },
+    {
+      "id": "synthetic-deactivated",
+      "name": "Synthetic Deactivated",
+      "display_name": "Synthetic Deactivated",
+      "family": "synthetic",
+      "architecture": { "input_modalities": ["text"], "output_modalities": ["text"], "tokenizer": "synthetic" },
+      "top_provider": { "is_moderated": false },
+      "providers": [],
+      "pricing": { "prompt": "0.1e-6", "completion": "0.1e-6" },
+      "context_length": 8000,
+      "json_output": true,
+      "structured_outputs": true,
+      "deprecated_at": "2025-06-01T00:00:00.000Z",
+      "deactivated_at": "2026-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "synthetic-multi-provider",
+      "name": "Synthetic Multi Provider",
+      "display_name": "Synthetic Multi Provider",
+      "family": "synthetic",
+      "architecture": { "input_modalities": ["text"], "output_modalities": ["text"], "tokenizer": "synthetic" },
+      "top_provider": { "is_moderated": false },
+      "providers": [
+        { "providerId": "prov-a", "externalId": "multi-a", "pricing": { "prompt": "1.0e-6", "completion": "2.0e-6" }, "streaming": true, "vision": false, "cancellation": true, "tools": true, "parallelToolCalls": true, "reasoning": false, "max_output": 8192 },
+        { "providerId": "prov-b", "externalId": "multi-b", "pricing": { "prompt": "3.0e-6", "completion": "4.0e-6" }, "streaming": true, "vision": false, "cancellation": true, "tools": false, "parallelToolCalls": false, "reasoning": false, "max_output": 4096 }
+      ],
+      "pricing": { "prompt": "1.0e-6", "completion": "2.0e-6" },
+      "context_length": 64000,
+      "max_output": 8192,
+      "supported_parameters": ["temperature", "max_tokens", "tools"],
+      "json_output": true,
+      "structured_outputs": false
+    },
+    { "name": "entry without an id (must be skipped, never guessed)" }
+  ]
+}
