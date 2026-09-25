@@ -1,0 +1,12 @@
+-- 0211_page_type_source: provenance of pages.page_type (spec sections 18-20:
+-- page-type business evidence, commercial relevance in scoring, offer-page
+-- detection). Additive only: one nullable column.
+--
+-- page_type_source values:
+--   'owner'    set by the owner with `pages set-type` (always wins);
+--   'config'   applied by URL reconciliation from site.pageTypes (path glob -> type);
+--   'inferred' guessed from crawl signals (structured data, URL, wording) by
+--              `pages infer-types --apply`; never overrides owner or config values.
+--   NULL       no type, or a type recorded before this migration (unknown provenance).
+-- Precedence: owner > config > inferred.
+ALTER TABLE pages ADD COLUMN page_type_source TEXT CHECK (page_type_source IS NULL OR page_type_source IN ('config', 'owner', 'inferred'));
