@@ -1,13 +1,18 @@
-# Code owners: changes to these paths require review from the maintainer.
+# Code owners: every change requires review from the maintainer.
 #
-# Maintainer: @fdrissi. Enable branch protection with "Require review from
-# Code Owners" so these reviews are enforced.
+# Maintainer: @fdrissi. The "Protect main" repository ruleset requires review
+# from Code Owners, so these reviews are enforced.
 #
+# Default owner for every path. It must stay first: the last matching pattern
+# wins, so the explicit entries below override it.
+*                                 @fdrissi
+
 # Sensitive areas (see AGENTS.md and docs/SECURITY_MODEL.md): CI workflows,
 # authentication, approvals, publishing/export, budget enforcement (including
 # paid provider adapters and workflow budget pre-flight), security helpers,
 # release tooling and the secret-scan allowlist, schema migrations, and
-# dependency manifests.
+# dependency manifests. Keep them listed explicitly so they stay owned by the
+# maintainer even if the default owner above changes.
 
 /.github/                         @fdrissi
 /.github/workflows/               @fdrissi
