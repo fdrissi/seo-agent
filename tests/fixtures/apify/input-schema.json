@@ -1,0 +1,282 @@
+{
+  "_synthetic": true,
+  "_note": "SYNTHETIC FIXTURE. Modeled on the documented Apify response shapes in docs/integration-contracts.md section 7 (retrieved 2026-09-24). Not live data; build ids are fake.",
+  "title": "Input schema for Reddit Scraper Pro",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "searchTerms": {
+      "title": "Search terms",
+      "type": "array",
+      "editor": "stringList",
+      "description": "Keywords to search. Free plans search the first 40 keywords per run.",
+      "default": []
+    },
+    "searchPosts": {
+      "title": "Search posts",
+      "type": "boolean",
+      "description": "Search posts",
+      "default": true
+    },
+    "searchComments": {
+      "title": "Search comments",
+      "type": "boolean",
+      "description": "Search comments",
+      "default": false
+    },
+    "searchCommunities": {
+      "title": "Search communities",
+      "type": "boolean",
+      "description": "Search communities",
+      "default": false
+    },
+    "withinCommunity": {
+      "title": "Within community",
+      "type": "string",
+      "editor": "textfield",
+      "default": ""
+    },
+    "searchSort": {
+      "title": "Sort",
+      "type": "string",
+      "editor": "select",
+      "enum": [
+        "",
+        "relevance",
+        "hot",
+        "top",
+        "new",
+        "comments"
+      ],
+      "default": "new"
+    },
+    "searchTime": {
+      "title": "Time",
+      "type": "string",
+      "editor": "select",
+      "enum": [
+        "all",
+        "hour",
+        "day",
+        "week",
+        "month",
+        "year"
+      ],
+      "default": "all"
+    },
+    "startUrls": {
+      "title": "Start URLs",
+      "type": "array",
+      "editor": "requestListSources",
+      "default": []
+    },
+    "fastMode": {
+      "title": "Fast mode",
+      "type": "boolean",
+      "description": "Fast mode",
+      "default": true
+    },
+    "subredditUrls": {
+      "title": "Subreddits (full scrape)",
+      "type": "array",
+      "editor": "stringList",
+      "description": "Subreddit names or community links.",
+      "default": []
+    },
+    "postedAfter": {
+      "title": "Posted after",
+      "type": "string",
+      "editor": "datepicker",
+      "description": "YYYY-MM-DD in UTC"
+    },
+    "postedBefore": {
+      "title": "Posted before",
+      "type": "string",
+      "editor": "datepicker"
+    },
+    "commentedAfter": {
+      "title": "Commented after",
+      "type": "string",
+      "editor": "datepicker"
+    },
+    "commentedBefore": {
+      "title": "Commented before",
+      "type": "string",
+      "editor": "datepicker"
+    },
+    "onlyWithFlair": {
+      "title": "Only with flair",
+      "type": "boolean",
+      "description": "Only with flair",
+      "default": false
+    },
+    "crawlCommentsPerPost": {
+      "title": "Crawl comments per post",
+      "type": "boolean",
+      "description": "Crawl comments per post",
+      "default": false
+    },
+    "includeNSFW": {
+      "title": "Include NSFW",
+      "type": "boolean",
+      "description": "Include NSFW",
+      "default": false
+    },
+    "maxPostsCount": {
+      "title": "Max posts (total across all inputs)",
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 50000,
+      "default": 50
+    },
+    "maxCommentsCount": {
+      "title": "Max comments (comment search, per keyword)",
+      "type": "integer",
+      "minimum": 0,
+      "default": 400
+    },
+    "maxCommentsPerPost": {
+      "title": "Max comments per post",
+      "type": "integer",
+      "minimum": 0,
+      "default": 200
+    },
+    "maxCommunitiesCount": {
+      "title": "Max communities",
+      "type": "integer",
+      "minimum": 0,
+      "default": 2
+    },
+    "aiAnalysis": {
+      "title": "AI analysis",
+      "type": "boolean",
+      "description": "Adds sentiment, intent, emotion. Billed per analyzed result.",
+      "default": false
+    },
+    "wantsHelp": {
+      "title": "wantsHelp",
+      "type": "boolean",
+      "description": "AI flag; billed as a custom label evaluation.",
+      "default": false
+    },
+    "isOwner": {
+      "title": "isOwner",
+      "type": "boolean",
+      "description": "AI flag; billed as a custom label evaluation.",
+      "default": false
+    },
+    "isVendor": {
+      "title": "isVendor",
+      "type": "boolean",
+      "description": "AI flag; billed as a custom label evaluation.",
+      "default": false
+    },
+    "hasPain": {
+      "title": "hasPain",
+      "type": "boolean",
+      "description": "AI flag; billed as a custom label evaluation.",
+      "default": false
+    },
+    "mentionsPrice": {
+      "title": "mentionsPrice",
+      "type": "boolean",
+      "description": "AI flag; billed as a custom label evaluation.",
+      "default": false
+    },
+    "featureRequest": {
+      "title": "featureRequest",
+      "type": "boolean",
+      "description": "AI flag; billed as a custom label evaluation.",
+      "default": false
+    },
+    "willingToPay": {
+      "title": "willingToPay",
+      "type": "boolean",
+      "description": "AI flag; billed as a custom label evaluation.",
+      "default": false
+    },
+    "painPoint": {
+      "title": "painPoint",
+      "type": "boolean",
+      "description": "AI flag; billed as a custom label evaluation.",
+      "default": false
+    },
+    "competitor": {
+      "title": "competitor",
+      "type": "boolean",
+      "description": "AI flag; billed as a custom label evaluation.",
+      "default": false
+    },
+    "customLabels": {
+      "title": "Custom labels",
+      "type": "object",
+      "editor": "json",
+      "default": {}
+    },
+    "mcpConnector": {
+      "title": "MCP connector",
+      "type": "string",
+      "resourceType": "mcpConnector"
+    },
+    "mcpMode": {
+      "title": "MCP mode",
+      "type": "string",
+      "enum": [
+        "perPost",
+        "summary"
+      ],
+      "default": "perPost"
+    },
+    "mcpTarget": {
+      "title": "MCP target",
+      "type": "string"
+    },
+    "mcpComments": {
+      "title": "MCP comments",
+      "type": "string",
+      "enum": [
+        "ignore",
+        "bundle",
+        "separate"
+      ],
+      "default": "ignore"
+    },
+    "mcpCommentsPerPost": {
+      "title": "MCP comments per post",
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 50,
+      "default": 5
+    },
+    "mcpMessage": {
+      "title": "MCP message",
+      "type": "string",
+      "default": "**{{title}}**\n{{postUrl}}"
+    },
+    "mcpTool": {
+      "title": "MCP tool",
+      "type": "string"
+    },
+    "mcpArguments": {
+      "title": "MCP arguments",
+      "type": "object",
+      "editor": "json"
+    },
+    "mcpMaxItems": {
+      "title": "MCP max items",
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 1000,
+      "default": 50
+    },
+    "mcpServerUrl": {
+      "title": "MCP server URL",
+      "type": "string"
+    },
+    "mcpServerToken": {
+      "title": "MCP server token",
+      "type": "string",
+      "isSecret": true
+    }
+  }
+}

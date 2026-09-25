@@ -1,0 +1,126 @@
+{
+  "_synthetic": true,
+  "_note": "SYNTHETIC FIXTURE. Modeled on the documented Apify response shapes in docs/integration-contracts.md section 7 (retrieved 2026-09-24). Not live data; build ids are fake.",
+  "data": {
+    "id": "9sHOY9RzPYGjmTHo8",
+    "userId": "SYNTHETICUSERID01",
+    "username": "harshmaur",
+    "name": "reddit-scraper",
+    "title": "Reddit Scraper - Posts, Comments, Search & Subreddits",
+    "isPublic": true,
+    "isDeprecated": false,
+    "notice": "NONE",
+    "modifiedAt": "2026-09-24T07:29:32.130Z",
+    "taggedBuilds": {
+      "latest": {
+        "buildId": "SYNBUILD000000513",
+        "buildNumber": "0.0.513",
+        "buildNumberInt": 513,
+        "finishedAt": "2026-09-24T07:29:32.130Z"
+      }
+    },
+    "versions": [
+      {
+        "versionNumber": "0.0",
+        "sourceType": "GIT_REPO",
+        "buildTag": "latest"
+      }
+    ],
+    "defaultRunOptions": {
+      "build": "latest",
+      "timeoutSecs": 12780,
+      "memoryMbytes": 512,
+      "maxItems": null,
+      "maxTotalChargeUsd": 0
+    },
+    "pricingInfos": [
+      {
+        "pricingModel": "PAY_PER_EVENT",
+        "startedAt": "2026-01-01T00:00:00.000Z",
+        "pricingPerEvent": {
+          "actorChargeEvents": {
+            "init": {
+              "eventTitle": "Actor Start",
+              "eventPriceUsd": 0.05,
+              "isOneTimeEvent": true
+            },
+            "result": {
+              "eventTitle": "Result Saved",
+              "eventPriceUsd": 0.003,
+              "isPrimaryEvent": true
+            }
+          }
+        }
+      },
+      {
+        "pricingModel": "PAY_PER_EVENT",
+        "startedAt": "2026-08-10T14:51:28.574Z",
+        "apifyMarginPercentage": 0.2,
+        "minimalMaxTotalChargeUsd": null,
+        "pricingPerEvent": {
+          "actorChargeEvents": {
+            "init": {
+              "eventTitle": "Actor Start",
+              "eventDescription": "Cost on starting actor per GB of memory",
+              "eventPriceUsd": 0.02,
+              "isOneTimeEvent": true
+            },
+            "result": {
+              "eventTitle": "Result Saved",
+              "eventDescription": "Charged when a post or comment is saved to the dataset",
+              "eventTieredPricingUsd": {
+                "FREE": {
+                  "tieredEventPriceUsd": 0.002
+                },
+                "BRONZE": {
+                  "tieredEventPriceUsd": 0.0018
+                },
+                "SILVER": {
+                  "tieredEventPriceUsd": 0.0016
+                },
+                "GOLD": {
+                  "tieredEventPriceUsd": 0.0015
+                },
+                "PLATINUM": {
+                  "tieredEventPriceUsd": 0.0015
+                },
+                "DIAMOND": {
+                  "tieredEventPriceUsd": 0.0015
+                }
+              },
+              "isPrimaryEvent": true
+            },
+            "analyzed_item": {
+              "eventTitle": "AI analyzed result",
+              "eventDescription": "Only with AI analysis on",
+              "eventPriceUsd": 0.0005
+            },
+            "custom_label": {
+              "eventTitle": "AI custom label evaluation",
+              "eventDescription": "Once per custom label per analyzed result",
+              "eventPriceUsd": 0.0001
+            }
+          }
+        }
+      },
+      {
+        "pricingModel": "PAY_PER_EVENT",
+        "startedAt": "2027-01-01T00:00:00.000Z",
+        "pricingPerEvent": {
+          "actorChargeEvents": {
+            "init": {
+              "eventTitle": "Actor Start",
+              "eventPriceUsd": 0.5,
+              "isOneTimeEvent": true
+            },
+            "result": {
+              "eventTitle": "Result Saved",
+              "eventPriceUsd": 0.5,
+              "isPrimaryEvent": true
+            }
+          }
+        }
+      }
+    ]
+  }
+}

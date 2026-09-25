@@ -1,0 +1,11 @@
+{
+  "_synthetic": true,
+  "_note": "SYNTHETIC example INPUT (not a schema). Import must reject it.",
+  "searchTerms": [
+    "example topic"
+  ],
+  "searchPosts": true,
+  "maxPostsCount": 10,
+  "crawlCommentsPerPost": true,
+  "maxCommentsPerPost": 5
+}
