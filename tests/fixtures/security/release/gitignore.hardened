@@ -1,0 +1,52 @@
+# SYNTHETIC fixture: a .gitignore that passes `scripts/release-check.mjs`
+# (every private sample path is ignored, including ones nested inside public
+# directories, and every public release file is kept). Used by
+# tests/integration/security/release-check.test.ts; also the proposed fix for
+# the repository .gitignore (no broad `!src/**` negation after the deny rules).
+/specs/
+node_modules/
+dist/
+coverage/
+*.tsbuildinfo
+
+.env
+.env.*
+!.env.example
+secrets/
+secrets.env
+/workspace/
+/seo-agent-workspace/
+/demo-workspace/
+/data/*
+!/data/README.md
+/exports/*
+!/exports/README.md
+/vault/*
+!/vault/README.md
+!/vault/_template/
+/config/sites/*
+!/config/sites/README.md
+!/config/sites/example.site.yaml
+*.sqlite
+*.sqlite-*
+*.sqlite3
+*.db
+*.db-*
+qdrant_storage/
+/qdrant/
+/reports/
+/diagnostics/
+/logs/
+/backups/
+*.log
+
+*client_secret*.json
+*service-account*.json
+*credentials*.json
+*token*.json
+!tests/fixtures/**/*.json
+
+playwright-report/
+test-results/
+/raw/
+.DS_Store
