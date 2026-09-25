@@ -1,0 +1,11 @@
+export { runSetupWizard, listWizardSteps, type SetupWizardOptions, type SetupWizardResult, type SetupStatus } from './wizard.js';
+export { createTerminalPromptIO, ScriptedPromptIO, SetupInterruptedError, type PromptIO, type PromptMeta, type ScriptedAnswer } from './prompt-io.js';
+export { draftFile, listDrafts, loadDraft, saveDraft, deleteDraft, newDraft, type SetupDraft, type DraftSummary } from './draft.js';
+export { planImport, planConfigWrite, writeConfigFile, renderNewConfig, applyToExistingConfig, validateConfigText, type ConfigWritePlan, type ImportPlan } from './config-file.js';
+export { createSetupServices, googleCredentialsPresent } from './probe.js';
+export { secretNeeds, featuresOf, assertNoKnownSecrets, type SecretNeed } from './secrets.js';
+export { PROFILE_INFO, renderProfileInfo, type ProfileInfo } from './profiles.js';
+export { WizardSession, type SetupServices, type GscDiscoveryResult, type ModelListResult } from './session.js';
+export { wizardSteps, stepsForErrorPath, type WizardStep } from './steps.js';
+export { runDoctor, renderDoctorReport, nodeCheck, levelForState, doctorFetch, type DoctorReport, type DoctorCheck, type DoctorOptions, type CheckLevel } from './doctor.js';
+export { checkBuildFreshness, runningBuildFreshness, REBUILD_STEPS, type BuildFreshness, type BuildInfo, type BuildState } from './build-info.js';
