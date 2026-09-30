@@ -42,6 +42,7 @@ export function renderDemoSummary(r: DemoResult): string {
     ['Dashboard', r.paths.dashboard ?? null],
     ['Baseline report', r.paths.baselineReport ?? null],
     ['Weekly report', r.paths.weeklyReport ?? null],
+    ['Weekly action plan (what to change this week)', r.paths.actionPlan ?? null],
     ['Draft note', r.paths.draft ?? null],
     ['Manual export package', r.paths.exportPackage ?? null],
     ['Demo database', r.paths.database ?? null],

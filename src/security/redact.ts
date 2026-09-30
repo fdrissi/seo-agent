@@ -142,6 +142,8 @@ const PATTERNS: Array<[RegExp, Replacement]> = [
   [/\beyJ[A-Za-z0-9_-]{8,}\.eyJ[A-Za-z0-9_-]{8,}\.[A-Za-z0-9_-]{8,}/g, REDACTED],
   // Generic "sk-" style keys
   [/\bsk-[A-Za-z0-9_-]{16,}/g, REDACTED],
+  // Telegram bot tokens ("<bot id>:<secret>", also inside Bot API URL paths as "/bot<id>:<secret>/")
+  [/(?<![A-Za-z0-9])(bot)?\d{6,12}:[A-Za-z0-9_-]{30,}(?![A-Za-z0-9_-])/g, (_m: string, bot: string | undefined) => `${bot ?? ''}${REDACTED}`],
   // key=value in query strings / form bodies. The value is masked up to the next '&', whitespace, '"', '#',
   // '<', or '>' ('<' and '>' are never legal unescaped in a URL, so they end it: "<https://x/?token=v>",
   // "href='https://x/?key=v'>link text"), or up to a ',' that starts another URL ("?password=v,https://b/").

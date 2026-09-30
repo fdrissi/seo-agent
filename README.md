@@ -17,10 +17,10 @@ MEASURE -> VALIDATE DATA -> ROUTE -> PRIORITIZE -> RESEARCH -> PROPOSE
 ```
 
 > **Status: version 0.1.0, pre-release.** Every integration is implemented
-> and tested offline against synthetic fixtures (297 offline test files with
-> 3395 tests, all passing on 2026-09-25 on Node.js 24 and 26). **No
+> and tested offline against synthetic fixtures (303 offline test files with
+> 3430 tests, all passing on 2026-09-30 on Node.js 24 and 26). **No
 > integration has been tested live with real credentials**: not Google, the
-> LLM Gateway, DataForSEO, Apify, PageSpeed/CrUX, or a running Qdrant. The
+> LLM Gateway, DataForSEO, Apify, PageSpeed/CrUX, Telegram, or a running Qdrant. The
 > first live run may surface response details the fixtures do not model.
 > See [docs/FEATURE_STATUS.md](docs/FEATURE_STATUS.md) for the honest status
 > of every feature, including what is still incomplete.

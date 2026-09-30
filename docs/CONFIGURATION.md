@@ -86,6 +86,7 @@ are not supported (keep key files under `secrets/google/` and point to them).
 | `QDRANT_URL` | no | `http://127.0.0.1:6333` | Local Qdrant endpoint. |
 | `QDRANT_API_KEY` | yes | - | Qdrant API key, when Qdrant is protected. |
 | `PAGESPEED_API_KEY` | yes | - | PageSpeed Insights / CrUX API key. |
+| `TELEGRAM_BOT_TOKEN` | yes | - | Telegram bot token from @BotFather, for weekly-run notifications (`notifications.telegram`). Sent to Telegram only, in the request path; always redacted. |
 | `SEO_AGENT_WORKSPACE` | no | - | Private workspace directory (overridden by `--workspace`). |
 | `SEO_AGENT_LOG_LEVEL` | no | - | `debug`, `info` (default), `warn`, or `error`. Unknown values fall back to `info`. |
 | `GSC_BASE_URL` | no | - | Optional Search Console API host: `https://searchconsole.googleapis.com` (used when unset) or `https://www.googleapis.com`. Any other value is refused. |
@@ -614,6 +615,26 @@ Experiment evaluation thresholds.
 | `experiments.lowTrafficMinObservationDays` | number | `56` | Minimum observation window for low-traffic pages. |
 | `experiments.minImpressionsForEvaluation` | number | `500` | Impressions required before search outcomes are evaluated. |
 | `experiments.minSessionsForConversionEvaluation` | number | `200` | Sessions required before conversion outcomes are evaluated. |
+
+### `actionPlans`
+
+Weekly action plans: one Markdown file per weekly run, for people and coding agents. Plans contain private search data.
+
+| Field | Type | Default | Description |
+| --- | --- | --- | --- |
+| `actionPlans.enabled` | boolean | `true` | Write an action plan file after every weekly run: the one change to make, "n/a" when nothing should change, or why the run was blocked. |
+| `actionPlans.dir` | string or null | `null` | Absolute path of the folder for plan files ("~/" means your home directory), for example a dedicated folder inside your website repository. Null uses <workspace>/plans/<site-id>. The folder must be new, empty, or already managed by seo-agent; seo-agent puts a .gitignore in it so its contents are never committed. |
+
+### `notifications`
+
+Notifications after weekly runs. Nothing is sent unless enabled.
+
+| Field | Type | Default | Description |
+| --- | --- | --- | --- |
+| `notifications.telegram` | object | - | Telegram notifications (Bot API sendMessage). |
+| `notifications.telegram.enabled` | boolean | `false` | Send a Telegram message after every weekly run. The bot token is TELEGRAM_BOT_TOKEN in the secret store, never here. |
+| `notifications.telegram.chatId` | string or null | `null` | Chat that receives the messages: a numeric chat ID or "@channelusername". Null until set. |
+| `notifications.telegram.includeActionTitle` | boolean | `false` | Include the planned action's title in the message. It can name a page URL or a search query, so the default (false) sends only the site ID, week, plan status, and plan file name. |
 
 ### `router`
 

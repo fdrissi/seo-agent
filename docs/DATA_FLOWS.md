@@ -27,6 +27,7 @@ documentation retrieved 2026-09-24). Recheck provider terms yourself.
 | Apify (Actor `9sHOY9RzPYGjmTHo8`) | `features.apify` + `APIFY_TOKEN` | Actor input: search terms, at most one community per run (`withinCommunity`, from `research.subreddits` with `apify research`), sort, time range, result/comment limits, run caps (memory, timeout, max charge); your token | Google/Gateway/CMS/DataForSEO/database credentials, analytics, site content, vault notes |
 | Web crawler (and optional Playwright) | `features.crawl` / `features.playwright` | HTTP requests to your own site and to competitor/approved domains, with the configured User-Agent and your IP address | cookies, credentials, other data |
 | Qdrant | `features.qdrant` | embedding vectors plus a metadata payload (ids, site, source type, trust class, status, language, content hash, dates), **stored on your Qdrant server** (localhost by default); `QDRANT_API_KEY` when set, only over `https://` or to a loopback host | chunk text (it stays in your local SQLite database), other credentials |
+| Telegram (weekly-run notifications) | `notifications.telegram.enabled` + `chatId` + `TELEGRAM_BOT_TOKEN` | after each weekly run: site ID, ISO week, plan status (`action`, `n/a`, `blocked`), plan file name (plus the action title only with `includeActionTitle: true`); the chat ID; your bot token (in the request path) | page URLs and queries (unless `includeActionTitle`), plan contents, analytics, other credentials; nothing for demo/synthetic data or in `--offline` |
 | Obsidian | never contacted | nothing: the vault is plain files; the Obsidian app is optional | n/a |
 | AI-citation monitoring | `features.aiCitations` (manual import only) | nothing: observations come from files you import | n/a |
 | Maintainers / telemetry | never | **nothing**: no telemetry, analytics, crash reporting, update checks, or diagnostics upload | n/a |
@@ -162,6 +163,32 @@ documentation retrieved 2026-09-24). Recheck provider terms yourself.
 `ai-citations import` reads a file you captured yourself and sends nothing:
 there is no API collector, so no AI search engine is contacted and nothing is
 charged. See [PRIVACY.md](PRIVACY.md#ai-citation-observations-optional).
+
+### Telegram (weekly-run notifications, optional)
+
+- **Endpoint:** `https://api.telegram.org/bot<token>/sendMessage` (and
+  `getMe` for the free `doctor --network` token check). Telegram's Bot API
+  is a third-party service; Telegram stores messages in the chat.
+- **Sent after each weekly run** (manual, resumed, or scheduled): the site
+  ID, the ISO week, the plan status (`action`, `n/a`, or `blocked`), and the
+  plan file name, as plain text with link previews off. The planned action's
+  title (which can name a page URL or a search query) is sent only when
+  `notifications.telegram.includeActionTitle` is `true`. `notify test` sends
+  one fixed test message.
+- **Not sent:** the plan's contents, page URLs or queries (by default),
+  analytics numbers, or other credentials. Demo and synthetic data, dry runs,
+  and `--offline` send nothing.
+- One attempt per message; a failure is recorded in the audit log, never
+  retried blindly.
+
+### Action plans (local files)
+
+Weekly action plans are Markdown files written to the plans folder
+(`actionPlans.dir`, default `<workspace>/plans/<site-id>`), with a
+`.gitignore` that keeps them out of Git. They contain private search data
+(page URLs, queries, clicks) and are never sent anywhere by seo-agent. If you
+point `actionPlans.dir` into a folder that a sync service or a coding agent
+reads, that service or agent receives the plans.
 
 ### Obsidian
 

@@ -19,7 +19,8 @@ Contents:
 6. DataForSEO API v3
 7. Apify API v2 and the Reddit Scraper Actor
 8. Qdrant, Obsidian Markdown, Node.js / node:sqlite
-9. Research gaps
+9. Telegram Bot API (weekly-run notifications; added 2026-09-30)
+10. Research gaps
 
 ---
 
@@ -2889,7 +2890,46 @@ type Condition =
 
 ---
 
-## 9. Research gaps
+## 9. Telegram Bot API (weekly-run notifications)
+
+Added on **2026-09-30** for `notifications.telegram` (src/integrations/telegram).
+Checked against the documentation on that date (Bot API 10.3, dated
+2026-08-24 in its changelog). No bot token was used and no request was sent
+to Telegram.
+
+### Sources
+
+| ID | URL | Retrieved | Fetched | Note |
+|---|---|---|---|---|
+| TG1 | https://core.telegram.org/bots/api | 2026-09-30 | yes | WebFetch summaries of "Making requests", getUpdates, Update, Chat, sendMessage, LinkPreviewOptions, ResponseParameters, getMe, "Authorizing your bot" |
+
+### Verified behavior
+
+- Requests go to `https://api.telegram.org/bot<token>/METHOD_NAME` over HTTPS; GET and POST are supported, with `application/json` bodies (TG1). The token is part of the path.
+- Every response is a JSON object with a Boolean `ok`, an optional `description`, `result` when `ok` is true, and an integer `error_code` whose "contents are subject to change in the future" (TG1).
+- `ResponseParameters.retry_after`: seconds left before the request can be repeated (TG1).
+- `getMe` is "a simple method for testing your bot's authentication token" and needs no parameters (TG1).
+- `sendMessage`: `chat_id` is an Integer or a String (the chat id or a channel username), `text` is 1-4096 characters after entities parsing, `parse_mode` is optional, and `link_preview_options` is a `LinkPreviewOptions` object whose `is_disabled` turns link previews off (TG1).
+- `getUpdates` takes `offset`, `limit`, `timeout`, and `allowed_updates`; an update is confirmed only by a later call with a higher `offset`; updates are kept at most 24 hours; the method does not work while an outgoing webhook is set (TG1).
+- `Update` has `message`, `edited_message`, `channel_post`, `edited_channel_post`, `my_chat_member`, and `chat_member`; `Chat` has `id`, `type` (`private`, `group`, `supergroup`, `channel`), `title`, `username`, and `first_name` (TG1).
+- A token looks like `123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11` (TG1).
+
+### Implementation contract
+
+- `sendMessage` with a JSON body `{chat_id, text, link_preview_options: {is_disabled: true}}`; no `parse_mode`, so text is never formatted. Numeric chat ids are sent as JSON numbers.
+- Text is cut to 4096 characters. One attempt per message; failures are recorded, never retried.
+- `getMe` (the `doctor --network` check) and `getUpdates` without `offset` (`notify chats`, which confirms nothing) are free and read-only.
+- Errors never contain the token: messages are built from the method name, the HTTP status, and Telegram's `description`, with the token removed and the text redacted.
+
+### Unverified / to recheck with credentials
+
+- **Error codes and descriptions.** `error_code` may change (TG1). The mapping of 401 and 404 to a rejected token, 403 and 400 "chat not found" to an unreachable chat, and 429 to rate limiting follows common Bot API behavior, not a documented table. Anything else is reported as `TELEGRAM_REJECTED` with Telegram's description.
+- **Numeric chat ids as JSON numbers vs strings.** Both types are documented; the numeric form was chosen and not tried live.
+- **Rate limits.** No documented per-chat limit was checked; one message per weekly run is far below any plausible limit.
+
+---
+
+## 10. Research gaps
 
 Sources that could not be fetched, or were fetched without usable primary content. No credentials were used anywhere. Every authenticated behavior (response bodies, headers, charges) is therefore still unverified; see each section's "Unverified" list.
 

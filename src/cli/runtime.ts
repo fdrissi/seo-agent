@@ -110,6 +110,8 @@ export const MUTATING_COMMANDS: ReadonlySet<string> = new Set([
   'content import',
   // Moves published content items to measuring (stage changes).
   'content measure',
+  // Writes a plan file into the plans folder (the weekly job's follow-up writes the same folder) and an audit event.
+  'plans write',
 ]);
 
 /**

@@ -84,6 +84,7 @@ const ENV_PURPOSE: Record<EnvKey, string> = {
   QDRANT_URL: 'Local Qdrant endpoint.',
   QDRANT_API_KEY: 'Qdrant API key, when Qdrant is protected.',
   PAGESPEED_API_KEY: 'PageSpeed Insights / CrUX API key.',
+  TELEGRAM_BOT_TOKEN: 'Telegram bot token from @BotFather, for weekly-run notifications (`notifications.telegram`). Sent to Telegram only, in the request path; always redacted.',
   SEO_AGENT_WORKSPACE: 'Private workspace directory (overridden by `--workspace`).',
   SEO_AGENT_LOG_LEVEL: '`debug`, `info` (default), `warn`, or `error`. Unknown values fall back to `info`.',
   GSC_BASE_URL: 'Optional Search Console API host: `https://searchconsole.googleapis.com` (used when unset) or `https://www.googleapis.com`. Any other value is refused.',

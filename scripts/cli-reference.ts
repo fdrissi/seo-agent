@@ -36,8 +36,8 @@ export const CLI_REFERENCE_SECTIONS: ReadonlyArray<{ title: string; commands: re
   { title: 'Content pipeline', commands: ['content'] },
   { title: 'Memory and vault', commands: ['memory', 'vault'] },
   { title: 'Experiments, approvals, and export', commands: ['experiments', 'approvals', 'export'] },
-  { title: 'Reports, data exchange, and costs', commands: ['report', 'data', 'ai-citations', 'costs'] },
-  { title: 'Jobs and scheduling', commands: ['jobs', 'schedule'] },
+  { title: 'Reports, data exchange, and costs', commands: ['report', 'plans', 'data', 'ai-citations', 'costs'] },
+  { title: 'Jobs and scheduling', commands: ['jobs', 'schedule', 'notify'] },
   { title: 'Backup, restore, and diagnostics', commands: ['backup', 'restore', 'diagnostics'] },
 ];
 

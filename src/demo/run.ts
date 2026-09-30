@@ -243,6 +243,7 @@ export async function runDemo(opts: DemoOptions = {}): Promise<DemoResult> {
     dashboard: null,
     baselineReport: null,
     weeklyReport: null,
+    actionPlan: null,
     draft: null,
     exportPackage: null,
   };
@@ -388,6 +389,7 @@ export async function runDemo(opts: DemoOptions = {}): Promise<DemoResult> {
     const nothingRedone = (Object.keys(before) as Array<keyof typeof before>).every((k) => before[k] === after[k]);
     const weeklyReport = resumed.outputs.report as ReportOutput | undefined;
     paths.weeklyReport = rel(ws.root, weeklyReport?.markdownFile ?? null);
+    paths.actionPlan = resumed.followUps?.find((f) => f.kind === 'action_plan' && f.status === 'written')?.path ?? null;
     if (weeklyReport?.dashboard) paths.dashboard = path.join(ws.vaultDir, weeklyReport.dashboard);
     record({
       id: 'resume',

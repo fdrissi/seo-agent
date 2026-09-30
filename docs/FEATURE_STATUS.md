@@ -6,6 +6,9 @@ current code and tests after the audit fixes of 2026-09-24 and the second,
 third, and fourth rounds of fixes on 2026-09-25 (every status below was
 checked against the code after the fourth round landed; see "Audit fixes"
 and the rounds of fixes under "Unreleased" in [CHANGELOG.md](../CHANGELOG.md)).
+On 2026-09-30 the two rows for weekly action plans and Telegram notifications
+(section 12) were added and the verification below was rerun; the other rows
+were not re-checked then.
 Spec section 32 requires exactly four statuses:
 
 | Status | Meaning |
@@ -18,21 +21,21 @@ Spec section 32 requires exactly four statuses:
 **The single most important fact:** no integration was tested live. No
 credentials were available or used, and no paid request was made. Everything
 that talks to Google, the LLM Gateway, DataForSEO, Apify, PageSpeed/CrUX, a
-running Qdrant, a real browser, or GitHub Actions is at best
+running Qdrant, Telegram, a real browser, or GitHub Actions is at best
 `implemented-awaiting-credentials`. The first live run may surface response
 details the fixtures do not model; `doctor --network` and each status command
 report what could and could not be verified.
 
-Verification performed for this page on 2026-09-25, after the fourth round
-of fixes:
+Verification performed for this page on 2026-09-30, after the weekly
+action plans and Telegram notifications were added:
 
 - `npx tsc -p tsconfig.json --noEmit` (TypeScript 7.0.2): no errors, on
   Node.js v26.3.0 and v24.21.0.
-- The full offline suite, `npx vitest run`: 297 test files and 3395 tests,
-  all passed, in about 92 seconds, on Node.js v26.3.0. The same suite also
+- The full offline suite, `npx vitest run`: 303 test files and 3430 tests,
+  all passed, in about 120 seconds, on Node.js v26.3.0. The same suite also
   passed on Node.js v24.21.0 (the Active LTS line that `.nvmrc` targets):
   `PATH=$HOME/.nvm/versions/node/v24.21.0/bin:$PATH node node_modules/vitest/vitest.mjs run`,
-  297 test files and 3395 tests, about 92 seconds. No test was skipped on
+  303 test files and 3430 tests, about 123 seconds. No test was skipped on
   this machine; on a case-sensitive filesystem (for example Linux CI) the
   letter-case path tests skip themselves. The run environment
   matters for the timing-sensitive end-to-end tests. It was macOS 26.6.2
@@ -79,17 +82,17 @@ in [REQUIREMENTS_TRACEABILITY.md](REQUIREMENTS_TRACEABILITY.md).
 
 ## Summary
 
-Counted from the rows of the tables below (201 rows):
+Counted from the rows of the tables below (203 rows):
 
 | Status | Rows |
 | --- | --- |
-| implemented-and-tested | 157 |
-| implemented-awaiting-credentials | 30 |
+| implemented-and-tested | 158 |
+| implemented-awaiting-credentials | 31 |
 | optional-disabled | 6 |
 | genuinely-incomplete | 8 |
 
 A row is a feature as the slices reported it, not a unit of equal size: the
-30 rows awaiting credentials include every adapter that talks to a live
+31 rows awaiting credentials include every adapter that talks to a live
 provider, which is where most real-world risk remains.
 `tests/unit/docs/status-docs.test.ts` recounts this table and checks that
 every test file named on this page exists, that no row denies a command the
@@ -324,6 +327,8 @@ provider adapter tested only against fakes is listed as
 | OS scheduling snippets (launchd, systemd, cron, server daemon); never pointed at a stale compiled build (the sources are used instead, with a warning) | implemented-and-tested | `tests/unit/jobs/instructions.test.ts`. The macOS plist was validated with `plutil -lint`; the systemd and cron snippets were not run on Linux. |
 | Baseline, weekly, monthly, and content-queue pipelines as durable jobs (degradation, reports, cost reconciliation, free `index_memory` stage in weekly, monthly, and content queue, free `site_structure` stage in weekly), wired in integration; the report period drives the join check and the routing window, and an explicit historical weekly period saves and supersedes nothing (the summary says "not saved: explicit historical period; review only", and the report's primary action says the recommendation was for review only); research candidates read one Search Console slice (the configured property and primary search type, else the only property with data; several properties are never mixed, and the fallback is skipped with the reason); the monthly `ai_visibility` stage reports `checksInPeriod: null` (not measured) when disabled or the period is unknown; an exhausted LLM budget never blocks a pipeline; `cost_plan` checks what is left of the budgets, not only the per-run cap; weekly and monthly reports get bounded country/device context | implemented-and-tested | `tests/integration/pipelines/baseline.test.ts`, `tests/integration/pipelines/weekly.test.ts`, `tests/integration/pipelines/pipelines-more.test.ts`, `tests/integration/pipelines/budget-period.test.ts`, `tests/integration/pipelines/site-structure-report.test.ts`, `tests/integration/pipelines/weekly.test.ts` ("research candidates read ONE Search Console slice"), `tests/integration/pipelines/pipelines-more.test.ts` ("checksInPeriod is null"). Offline with fixture providers; with live data they depend on the adapters above. |
 | Honest pipeline summaries (a run with skipped, degraded, or offline stages is never shown as a bare "succeeded", and `jobs list`, `jobs show`, `--json`, and the headline count the same degraded stages; the checkpoint table of `jobs show` and the pipeline stage table show each counted stage with its degraded status (`--json` adds `displayStatus`), including a stage the engine ran without its paid work; the offline demo's step status uses the same list; the dry-run note follows the effective dry run; the not-saved reason of a recommendation is the real one: a dry run, or an explicit historical period; the pipeline commands and the demo print one shared stage table, so a stage the engine ran without its optional paid work is `degraded` in both; the engine logs a stage whose own note says offline, skipped, or degraded at warn with its status and code, never "Stage ... succeeded"; the demo's interrupt step lists checkpointed stages that did not do all of their work apart from the completed ones) and RESEARCH-mode spending caps printed before the run starts | implemented-and-tested | `tests/unit/cli/pipelines-render.test.ts` ("recommendation not-saved reason", "degraded content-research stages", "shared stage display rows (pipeline commands and demo)"), `tests/unit/workflows/engine.test.ts` ("logs stages whose output note is offline/skipped/degraded at warn"), `tests/integration/jobs/degraded-summary.test.ts`, `tests/integration/cli/pipelines-caps.test.ts`, `tests/e2e/demo.test.ts` |
+| Weekly action plans: after every weekly run (manual, resumed, or scheduled) one Markdown file in the plans folder (`actionPlans.dir`, default `<workspace>/plans/<site-id>`) with status `action`, `n/a`, or `blocked` (a failed run, or one waiting for a review, with its error and next step), exact values in YAML front matter, the pages under observation, the concluded experiments, and untrusted text escaped; a second plan in the same week gets a `-2` suffix, never an overwrite; dry runs and explicit historical periods write none; the folder gets a `.gitignore` that ignores everything, and a folder that already holds other files is refused; a follow-up failure never changes the job's outcome; `plans list`, `plans write`, and a `doctor` check of the folder | implemented-and-tested | `tests/unit/plans/render.test.ts`, `tests/unit/plans/folder.test.ts` ("keeps plans out of git in a repository around the folder"), `tests/integration/plans/weekly-plan.test.ts`, `tests/integration/cli/plans-notify.test.ts`, `tests/integration/setup/doctor-telegram.test.ts` ("action plans folder") |
+| Telegram notifications after weekly runs (site ID, ISO week, plan status, plan file name; the action title only with `notifications.telegram.includeActionTitle`), never for synthetic data, dry runs, or `--offline`; one attempt per message, a failure recorded in the audit log and shown in the run output; `notify test`, `notify chats`, and the free `doctor --network` token check | implemented-awaiting-credentials | Fake fetch only: `tests/unit/integrations/telegram.test.ts`, `tests/integration/plans/weekly-plan.test.ts`, `tests/integration/cli/plans-notify.test.ts`, `tests/integration/setup/doctor-telegram.test.ts`. Requests follow the Telegram Bot API documentation and were never sent to Telegram. |
 | Monthly competitor-change re-checks (RESEARCH mode only; without a check in the period, competitor changes are DATA UNAVAILABLE, never "no changes") | implemented-and-tested | `tests/integration/pipelines/pipelines-more.test.ts`, `tests/integration/reports/audit-fixes.test.ts` ("A7-04") (offline fixtures; live competitor pages untested). |
 
 ## 13. Reports and dashboard
@@ -389,5 +394,6 @@ provider adapter tested only against fakes is listed as
 | Apify | API token, pinned verified build | `apify inspect`, `apify status --network`, one approved `--mode RESEARCH apify test` |
 | Qdrant | Docker | `docker compose up -d qdrant`, `memory status --network` |
 | Obsidian (optional) | The app | Open `<workspace>/vault/<site-id>` as a vault |
+| Telegram (optional) | A bot token from @BotFather, a chat that wrote to the bot | `notify chats`, `doctor --network`, `notify test` |
 
 Step-by-step instructions: [ACCESS_SETUP.md](ACCESS_SETUP.md).

@@ -17,7 +17,8 @@ export type IntegrationId =
   | 'crux'
   | 'playwright'
   | 'crawler'
-  | 'obsidian';
+  | 'obsidian'
+  | 'telegram';
 
 export type IntegrationState =
   | 'ready' // configured and (if checked) reachable

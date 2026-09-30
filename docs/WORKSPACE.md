@@ -11,7 +11,7 @@ overwrites the other.
 | `docs/`, `config/sites/example.site.yaml` (synthetic) | `secrets/`: API keys and Google credential files (0700) |
 | `vault/_template/`: vault templates | `vault/<site-id>/`: your Obsidian-compatible vault |
 | synthetic fixtures in `tests/fixtures/` | `data/seo-agent.sqlite`, `data/raw/`, `data/cache/`, `qdrant/` |
-| | `reports/`, `exports/`, `logs/`, `backups/`, `diagnostics/` |
+| | `reports/`, `plans/`, `exports/`, `logs/`, `backups/`, `diagnostics/` |
 
 Real site configuration, credentials, notes, analytics, databases, crawled
 data, drafts, reports, logs, and backups belong only in the workspace. Keep it
@@ -52,10 +52,18 @@ unless you relocate some folders with the optional `paths` block in
   data/cache/                           provider response cache
   qdrant/                               Qdrant storage (a rebuildable index)
   reports/  exports/                    generated reports and manual exports
+  plans/<site-id>/                0700  weekly action plans (unless actionPlans.dir points elsewhere); own .gitignore "*"
   logs/                                 redacted JSON-lines logs (0600)
   backups/                              backups (database, config, vault, raw, reports), pre-migration and pre-restore backups
   diagnostics/                          redacted diagnostic bundles for bug reports
 ```
+
+Weekly action plans are created by the first weekly run, not by `init`. The
+plans folder can live outside the workspace (`actionPlans.dir`, for example a
+dedicated folder in your website repository); wherever it is, seo-agent gives
+it a `.gitignore` that ignores everything in it and refuses a folder that
+already holds other files. Plans are not part of backups: `plans write --job
+<id>` writes a job's plan again from its stored report.
 
 ## Creating a workspace: `init`
 

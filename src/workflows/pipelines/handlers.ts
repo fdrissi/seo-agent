@@ -17,6 +17,7 @@ import { createPipelineEnv, pipelineParamsSchema, type PipelineEnv, type Pipelin
 import { CONTENT_QUEUE_LOCK, CONTENT_QUEUE_STAGE_ORDER, CONTENT_QUEUE_WORKFLOW, contentQueueParamsSchema, createContentQueueStages } from './content-queue.js';
 import { MONTHLY_STAGE_ORDER, MONTHLY_WORKFLOW, createMonthlyStages } from './monthly.js';
 import { WEEKLY_STAGE_ORDER, WEEKLY_WORKFLOW, createWeeklyStages } from './weekly.js';
+import { followUpsOf, type FollowUp } from '../../plans/publish.js';
 
 /**
  * Durable job handlers for the pipelines, registered with the default job
@@ -158,6 +159,8 @@ export interface PipelineRunResult {
   error: { code: string; message: string; hint?: string } | null;
   /** Latest checkpointed outputs of the stages most useful to the owner. */
   outputs: Record<string, unknown>;
+  /** Weekly runs: what happened after the job settled (action plan file, Telegram notification), from the audit log. */
+  followUps?: FollowUp[];
 }
 
 const SUMMARY_STAGES = ['check_access', 'cost_plan', 'optional_ai', 'research', 'compare', 'index_memory', 'recommend', 'site_structure', 'report', 'reconcile_costs', 'prioritize', 'queue_gate', 'crawl_site', 'check_measurement', 'validate_joins', 'review_experiments'];
@@ -239,6 +242,7 @@ export function summarizeRun(ctx: AppContext, r: RunJobResult, scratch: boolean,
     note: res ? workflowResultNote({ ...res, degradedStages }) : workflowResultNote(job.result),
     error,
     outputs,
+    followUps: followUpsOf(ctx, job.id),
   };
 }
 
