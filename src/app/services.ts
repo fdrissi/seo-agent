@@ -26,6 +26,7 @@ import { createLlmClient, type GatewayClientOptions } from '../integrations/llm/
 import { llmStatus } from '../integrations/llm/status.js';
 import type { EmbedRequest, EmbedResult, LlmClient, LlmFailureStatus, LlmUnavailable, ModelTier, StructuredRequest, StructuredResult, TextRequest, TextResult } from '../integrations/llm/types.js';
 import { performanceStatuses } from '../integrations/pagespeed/status.js';
+import { telegramStatus } from '../integrations/telegram/status.js';
 import type { FetchLike, IntegrationId, IntegrationState, IntegrationStatus, StatusCheckOptions } from '../integrations/types.js';
 import { createMemoryService, memoryStatus, type MemoryService, type MemoryServiceDeps } from '../memory/service.js';
 import { vaultIntegrationStatus } from '../obsidian/status.js';
@@ -554,6 +555,7 @@ export async function collectStatuses(ctx: AppContext, services: AppServices | n
   }
   if (want('apify')) out.push(...(await safeStatus(ctx, 'apify', () => apifyStatus(ctx, { network, ...(svc.apify.client ? { client: svc.apify.client } : {}) }))));
   if (want('obsidian')) out.push(...(await safeStatus(ctx, 'obsidian', async () => vaultIntegrationStatus(ctx, siteVaultDir(ctx.paths, ctx.siteId)))));
+  if (want('telegram')) out.push(...(await safeStatus(ctx, 'telegram', () => telegramStatus(ctx, { network }))));
 
   // Service-creation issues not already represented by a reporter (e.g. a Google provider that failed to build).
   for (const issue of svc.issues) {

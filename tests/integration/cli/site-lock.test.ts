@@ -339,6 +339,10 @@ const NOT_LEASED: Record<string, string> = {
   'pages list': READ_ONLY,
   'perf priority': READ_ONLY,
   'perf status': READ_ONLY,
+  'plans list': READ_ONLY,
+  // Sends one test message; records only an audit event (no site data changes).
+  'notify test': WORKSPACE,
+  'notify chats': READ_ONLY,
   baseline: JOB_RUNNER,
   weekly: JOB_RUNNER,
   monthly: JOB_RUNNER,

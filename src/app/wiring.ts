@@ -3,8 +3,10 @@ import { collectStatuses, createServices, createSsrfSafePageFetcher, defaultFixt
 import { registerSitePageFetcherFactory, type SitePageFetcherContext } from '../approvals/page-fetch.js';
 import { registerContentDepsFactory } from '../content/deps.js';
 import { registerContentJobHandlers } from '../content/jobs.js';
+import { registerJobSettledListener } from '../jobs/settled.js';
 import { registerMemoryLlmFactory } from '../memory/wiring.js';
 import { registerIntegrationStatusProvider } from '../obsidian/status.js';
+import { publishWeeklyOutcome } from '../plans/publish.js';
 import { registerPipelineJobHandlers } from '../workflows/pipelines/handlers.js';
 
 /**
@@ -26,6 +28,8 @@ import { registerPipelineJobHandlers } from '../workflows/pipelines/handlers.js'
  * - jobs: baseline / weekly / monthly / content.queue handlers (and the
  *   content slice's own job types) in the default registry, so `jobs resume`
  *   and `schedule run` can continue them.
+ * - settled weekly jobs: the action plan file and the Telegram notification
+ *   (src/plans/publish.ts), whether the run was manual, resumed, or scheduled.
  *
  * Idempotent; `uninstallWiring()` clears the registrations (tests).
  */
@@ -62,6 +66,8 @@ export function installWiring(): void {
 
   registerPipelineJobHandlers();
   registerContentJobHandlers();
+
+  registerJobSettledListener((ctx, r) => publishWeeklyOutcome(ctx, r));
 }
 
 /** Clear the registrations made by installWiring (job handlers stay registered: the job registry has no removal hook). */
@@ -70,5 +76,6 @@ export function uninstallWiring(): void {
   registerContentDepsFactory(null);
   registerIntegrationStatusProvider(null);
   registerSitePageFetcherFactory(null);
+  registerJobSettledListener(null);
   installed = false;
 }

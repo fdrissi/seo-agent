@@ -37,7 +37,7 @@ the repository root.
 5. [Apify (Reddit Scraper actor 9sHOY9RzPYGjmTHo8)](#5-apify-reddit-scraper-actor-9shoy9rzpygjmtho8)
 6. [Qdrant, the Obsidian vault, and memory retrieval](#6-qdrant-the-obsidian-vault-and-memory-retrieval)
 7. [First run: doctor, cost plan, baseline, recommendation, draft, implementation](#7-first-run-doctor-cost-plan-baseline-recommendation-draft-implementation)
-8. [Scheduling, only after a successful manual run](#8-scheduling-only-after-a-successful-manual-run)
+8. [Scheduling, only after a successful manual run](#8-scheduling-only-after-a-successful-manual-run) (weekly action plans, Telegram notifications)
 9. [Revocation and removal summary](#9-revocation-and-removal-summary)
 10. [First-month checklist](#10-first-month-checklist)
 
@@ -983,6 +983,67 @@ publishing always need you. A sleeping or offline laptop cannot run jobs.
 With the OAuth Testing audience, scheduled syncs stop after 7 days (3.2).
 Full guide: [SCHEDULING.md](SCHEDULING.md).
 
+### 8.1 Weekly action plans
+
+Every weekly run (manual, resumed, or scheduled) writes one action plan file:
+the one change to make this week (`action`), `n/a` when nothing should
+change, or `blocked` with the reason and the fix when the run did not finish.
+Plans go to `<workspace>/plans/<site-id>/` unless you set `actionPlans.dir`,
+for example to a dedicated folder in your website repository so a coding
+agent working there can read them:
+
+```yaml
+actionPlans:
+  dir: /Users/you/projects/my-site/seo-plans   # absolute, or "~/..."
+```
+
+seo-agent creates the folder with a `.gitignore` that ignores everything in
+it, so plans (which contain your search data) are never committed. It refuses
+a folder that already has other files in it. `npm run cli -- plans list`
+shows the plans and the folder; `npm run cli -- plans write` writes the plan
+of the latest weekly job again.
+
+### 8.2 Telegram notifications (optional)
+
+After each weekly run, seo-agent can send you a short Telegram message: the
+site, the week, the plan status, and the plan file name. What is sent is
+listed in [DATA_FLOWS.md](DATA_FLOWS.md#telegram-weekly-run-notifications-optional).
+
+1. In Telegram, open **@BotFather**, send `/newbot`, and choose a name and a
+   username. BotFather replies with the bot token.
+2. Put the token in `<workspace>/secrets/secrets.env` yourself:
+   `TELEGRAM_BOT_TOKEN=<token>`. Never paste it into a chat, an issue, or the
+   site config. Anyone with the token can send messages as your bot.
+3. Open the chat with your new bot and send `/start` (a bot cannot start a
+   conversation). For a group or channel, add the bot and post a message
+   there.
+4. Find the chat ID:
+
+   ```sh
+   npm run cli -- notify chats        # chats that wrote to the bot in the last 24 hours
+   ```
+
+5. Enable notifications in the site config:
+
+   ```yaml
+   notifications:
+     telegram:
+       enabled: true
+       chatId: "123456789"             # from notify chats
+       includeActionTitle: false       # true also sends the action title (it can name a URL or a query)
+   ```
+
+6. Check it:
+
+   ```sh
+   npm run doctor -- --network        # free getMe check of the token
+   npm run cli -- notify test         # sends one test message
+   ```
+
+Nothing is sent for demo data, dry runs, or `--offline`. A failed message is
+shown in the weekly run's output ("After the run") and recorded in the audit
+log; it never changes the job's result.
+
 ---
 
 ## 9. Revocation and removal summary
@@ -1001,6 +1062,7 @@ check the provider's usage history for activity you did not cause.
 | DataForSEO | Regenerate the API password on the API Access page | `research status --network` |
 | Apify token | New token, delete the old one in the Apify console | `apify status --network` |
 | Qdrant API key | Change server key and `QDRANT_API_KEY` together, restart Qdrant | `memory status --network` |
+| Telegram bot token | `/revoke` in @BotFather, put the new token in `secrets.env` | `notify test` |
 
 To remove everything: disable schedules and uninstall any OS timer you
 installed, stop Qdrant, export what you want to keep, delete the workspace

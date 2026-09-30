@@ -13,6 +13,51 @@ sent to external services, and new paid-service usage.
 
 ## [Unreleased]
 
+### Weekly action plans and Telegram notifications (2026-09-30)
+
+After every weekly run (manual, resumed, or scheduled), seo-agent writes the
+week's action plan and can notify you on Telegram. Tested offline only;
+Telegram was never contacted.
+
+**Upgrade notice.**
+
+- No new database migration and no `workspace.json` change.
+- Site-config schema: new optional blocks `actionPlans` (`enabled`, default
+  `true`; `dir`, default `<workspace>/plans/<site-id>`) and
+  `notifications.telegram` (`enabled`, default `false`; `chatId`;
+  `includeActionTitle`, default `false`). Existing configs stay valid.
+- New secret: `TELEGRAM_BOT_TOKEN` (in `secrets.env`, redacted everywhere).
+- New data sent to an external service, only when you enable
+  `notifications.telegram`: after each weekly run, the site ID, ISO week,
+  plan status, and plan file name to Telegram (the action title only with
+  `includeActionTitle`). See `docs/DATA_FLOWS.md`.
+- No new paid-service usage.
+
+**Added**
+
+- Weekly action plans (`src/plans`): one Markdown file per weekly run with
+  status `action`, `n/a`, or `blocked` (with the error and the fix), exact
+  values in YAML front matter, pages under observation ("Do not change
+  these pages"), and the experiments already tested. Written to a dedicated
+  folder with a `.gitignore` that ignores everything, so plans stay out of
+  Git even inside a website repository; a folder holding other files is
+  refused. Never overwritten (a second plan in a week gets `-2`); dry runs
+  and explicit historical periods write none.
+- A settled-job listener (`src/jobs/settled.ts`) called by the job runner
+  after every run it returns; its failure never changes the job outcome. The
+  weekly run output and `--json` list what happened after the run
+  (`followUps`), read from new audit events (`action_plan.*`,
+  `notification.*`).
+- Telegram Bot API adapter (`src/integrations/telegram`) and a `telegram`
+  status in `doctor` (`--network` checks the token with the free `getMe`);
+  `doctor` also checks the action plans folder, and redacts the paths in its
+  request log (the Bot API puts the token in the path).
+- The offline demo's summary names the weekly action plan it wrote.
+- Commands: `plans list`, `plans write [--job <id>] [--notify]` (takes the
+  site lease), `notify chats` (find the chat ID), `notify test`.
+- Redaction of Telegram bot tokens, also inside Bot API URLs.
+- `SKILL.md` section 4a tells agents how to read and act on a plan.
+
 ### Fourth round of fixes (2026-09-25)
 
 Fixes from a fourth audit round. Every change is tested offline (296 test

@@ -136,8 +136,8 @@ with `LOCKED` for as long as a live lease exists:
 `content bootstrap`, `content import`, `content measure`,
 `experiments review`, `export`, `apify test`, `apify research`,
 `apify import-schema`, `apify inspect`, `data import`, `pages set-type`,
-`memory sync`, `memory rebuild`, `memory reconcile`, `models test`, and
-`costs reconcile`.
+`memory sync`, `memory rebuild`, `memory reconcile`, `models test`,
+`costs reconcile`, and `plans write`.
 They do nothing, and the message names the holder and the next step
 (`jobs show`, wait, or `jobs cancel`; for another manual command's lease,
 `jobs locks`). Some commands take the lease only with the options that make
@@ -1823,6 +1823,35 @@ npm run cli -- report dashboard [options]
 | --- | --- |
 | `--statuses <file>` | JSON file with integration statuses |
 
+### `plans`
+
+Weekly action plans: one Markdown file per weekly run (what to change, n/a, or blocked), git-ignored
+
+Subcommands: `list`, `write`.
+
+#### `plans list`
+
+List the plan files of the site, newest first, and where the plans folder is
+
+```sh
+npm run cli -- plans list
+```
+
+No command-specific options (global options apply).
+
+#### `plans write`
+
+Write the action plan of a finished weekly job again (default: the latest weekly job). Never overwrites: a second plan in the same week gets a -2 suffix. With --notify, also sends the Telegram notification.
+
+```sh
+npm run cli -- plans write [options]
+```
+
+| Option | Meaning |
+| --- | --- |
+| `--job <id>` | weekly job to write the plan for |
+| `--notify` | also send the Telegram notification (notifications.telegram) |
+
 ### `data`
 
 CSV/JSON exchange: export one dataset at its stored grain, or import Search Console exports and keyword lists with provenance
@@ -2096,6 +2125,32 @@ npm run cli -- schedule run [options]
 | `--tick-seconds <n>` | seconds between ticks in daemon mode (default: `60`) |
 | `--all-sites` | serve every site configured in the workspace |
 | `--max-ticks <n>` | stop after n ticks (testing) |
+
+### `notify`
+
+Notifications after weekly runs (Telegram)
+
+Subcommands: `chats`, `test`.
+
+#### `notify chats`
+
+List the chats that wrote to your bot in the last 24 hours, with the IDs to use for notifications.telegram.chatId (free, read-only; never shows message text)
+
+```sh
+npm run cli -- notify chats
+```
+
+No command-specific options (global options apply).
+
+#### `notify test`
+
+Send one test message to notifications.telegram.chatId (free; nothing else is sent). --dry-run shows the message without sending it.
+
+```sh
+npm run cli -- notify test
+```
+
+No command-specific options (global options apply).
 
 ## Backup, restore, and diagnostics
 

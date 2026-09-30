@@ -139,16 +139,17 @@ Version 0.1.0 does **not** delete data automatically. You control retention.
 | Raw API responses | `<workspace>/data/raw/` | Delete files older than your retention period (observations keep the reference; the raw file is then reported as unavailable). |
 | Cached research | `<workspace>/data/cache/` | Delete the directory; it is rebuilt on demand (may cost money to refetch). |
 | Reports, exports | `<workspace>/reports/`, `<workspace>/exports/` | Delete files you no longer need. `data export` writes inside `<workspace>/exports/data` by default; an explicit `--out` is refused inside the vault, `secrets/`, or the application repository outside the workspace (where a file could be committed). |
+| Action plans | `<workspace>/plans/<site-id>/`, or the folder `actionPlans.dir` names | Delete plan files you no longer need; keep the folder's `.gitignore` if the folder stays inside a repository. Plans contain page URLs, queries, and click numbers, and are not included in backups. |
 | Logs | `<workspace>/logs/` | Delete or rotate; logs are redacted but may contain URLs. |
 | Diagnostics | `<workspace>/diagnostics/` | Delete after use. |
 | Vector index | Qdrant storage (`<workspace>/qdrant/`) | Rebuildable: remove the collection or directory, then `npm run cli -- memory rebuild`. Memory documents support tombstones and purge with deletion propagation (see `docs/modules/memory.md`). |
 | Vault notes | `<workspace>/vault/<site-id>/` | Edit or delete notes; generated notes are regenerated from SQLite. |
 | Database | `<workspace>/data/seo-agent.sqlite` (mode 0600, with its `-wal`/`-shm` files) | Metrics, research, and audit history are authoritative and append-oriented (the audit log and the GA4 rate-scale confirmations are append-only by design). To remove a whole site's data, delete the workspace (after exporting what you need) or restore a backup from before the data existed. |
 | Backups | `<workspace>/backups/` | Backups contain the database, site configs, vault, raw API responses, and reports by default (`backup --no-raw` / `--no-reports` skip the last two); purge old backups too, or deleted data persists in them. |
-| Provider-side copies | Apify datasets/runs, DataForSEO task results, LLM provider logs | Governed by each provider's retention; delete them in the provider console if needed. |
+| Provider-side copies | Apify datasets/runs, DataForSEO task results, LLM provider logs, Telegram messages | Governed by each provider's retention; delete them in the provider console if needed. |
 
 To remove everything: stop any scheduled jobs, then delete the workspace
-directory and revoke the credentials (Google: remove the app's access or delete
+directory (and a plans folder outside it) and revoke the credentials (Google: remove the app's access or delete
 the OAuth client/service account; rotate or delete the other API keys).
 
 ## Diagnostics

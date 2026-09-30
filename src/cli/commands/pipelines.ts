@@ -185,6 +185,14 @@ export function renderPipelineRun(r: PipelineRunResult): string {
     lines.push('', `${spendSummaryText(costs.spend, { demo: costs.spendDemo === true })}${costs.unresolvedReservations?.length ? `; ${costs.unresolvedReservations.length} unresolved reservation(s)` : ''}`);
   }
   if (r.workflow.warnings.length) lines.push('', ...r.workflow.warnings.slice(0, 5).map((w) => `Warning: ${w}`));
+  const followUps = r.followUps ?? [];
+  if (followUps.length) {
+    lines.push('', 'After the run:');
+    for (const f of followUps) {
+      if (f.kind === 'action_plan') lines.push(`  action plan ${f.status}${f.planStatus ? ` (${f.planStatus})` : ''}: ${f.path ?? f.detail}`);
+      else lines.push(`  telegram ${f.status}${f.status === 'sent' ? '' : `: ${f.detail}`}`);
+    }
+  }
   if (!r.scratchDatabase && (r.outcome === 'failed' || r.outcome === 'interrupted' || r.outcome === 'retry_scheduled')) lines.push('', `Resume from the last successful checkpoint: npm run cli -- jobs resume ${r.jobId}`);
   return lines.join('\n');
 }

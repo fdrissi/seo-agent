@@ -12,6 +12,7 @@ import { CircuitBreakers, type CircuitBreakerOptions } from './circuit-breaker.j
 import { DEFAULT_LOCK_NAME, acquireSiteLock, getSiteLock, releaseSiteLock, renewSiteLock, type LockInfo } from './locks.js';
 import { defaultProcessStartedAt, describeLeaseHolder, leaseHolderAliveReason, noteUnrenewedLease, type LeaseHolderCheck } from './manual-lease.js';
 import type { JobRegistry } from './registry.js';
+import { notifyJobSettled } from './settled.js';
 import { closeUnstartedJob, consecutiveInterruptedRuns, enqueue, failedRunCount, getJob, listJobRuns, requireJob, resumeJobCommand, toJobRecord, type EnqueueOptions, type RunningJobHolder } from './store.js';
 import { recordStageReview, type StageReviewRecord } from '../workflows/reviews.js';
 import type { JobHandlerContext, JobOutcome, JobRecord, JobRow, JobStatus } from './types.js';
@@ -229,13 +230,16 @@ export class JobRunner {
     while (this.holds.size) await Promise.all([...this.holds]);
   }
 
-  /** Run one job (and, with retryInline, its retries) to a stable status. */
+  /** Run one job (and, with retryInline, its retries) to a stable status. The settled-job listener (src/jobs/settled.ts) sees the result. */
   async runJob(ctx: AppContext, jobId: string, opts: RunJobOptions = {}): Promise<RunJobResult> {
     let first = true;
     for (;;) {
       const r = await this.runOnce(ctx, jobId, first ? opts : { ...opts, ignoreSchedule: true });
       first = false;
-      if (r.outcome !== 'retry_scheduled' || !opts.retryInline) return r;
+      if (r.outcome !== 'retry_scheduled' || !opts.retryInline) {
+        await notifyJobSettled(ctx, r);
+        return r;
+      }
       const delay = Math.max(0, Date.parse(r.nextAttemptAt) - ctx.clock.now().getTime());
       ctx.logger.info(`Job ${jobId} failed (${r.error.code}); retrying in ${Math.round(delay / 1000)}s`, { attempt: r.job.attempt });
       try {

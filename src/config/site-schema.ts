@@ -491,6 +491,41 @@ export const siteConfigSchema = z.object({
     })
     .prefault({})
     .describe('Experiment evaluation thresholds.'),
+  actionPlans: z
+    .object({
+      enabled: z.boolean().default(true).describe('Write an action plan file after every weekly run: the one change to make, "n/a" when nothing should change, or why the run was blocked.'),
+      dir: z
+        .string()
+        .min(1)
+        .nullable()
+        .default(null)
+        .describe(
+          'Absolute path of the folder for plan files ("~/" means your home directory), for example a dedicated folder inside your website repository. Null uses <workspace>/plans/<site-id>. The folder must be new, empty, or already managed by seo-agent; seo-agent puts a .gitignore in it so its contents are never committed.',
+        ),
+    })
+    .prefault({})
+    .describe('Weekly action plans: one Markdown file per weekly run, for people and coding agents. Plans contain private search data.'),
+  notifications: z
+    .object({
+      telegram: z
+        .object({
+          enabled: z.boolean().default(false).describe('Send a Telegram message after every weekly run. The bot token is TELEGRAM_BOT_TOKEN in the secret store, never here.'),
+          chatId: z
+            .string()
+            .regex(/^(-?\d{1,20}|@[A-Za-z][A-Za-z0-9_]{4,31})$/, 'Use a numeric chat ID (e.g. "123456789" or "-1001234567890") or a channel username such as "@my_channel"')
+            .nullable()
+            .default(null)
+            .describe('Chat that receives the messages: a numeric chat ID or "@channelusername". Null until set.'),
+          includeActionTitle: z
+            .boolean()
+            .default(false)
+            .describe("Include the planned action's title in the message. It can name a page URL or a search query, so the default (false) sends only the site ID, week, plan status, and plan file name."),
+        })
+        .prefault({})
+        .describe('Telegram notifications (Bot API sendMessage).'),
+    })
+    .prefault({})
+    .describe('Notifications after weekly runs. Nothing is sent unless enabled.'),
   router: z
     .object({
       rankingPositionMin: z.number().min(1).default(4).describe('Lower bound of the "striking distance" average position band.'),
@@ -559,6 +594,9 @@ export function parseSiteConfig(raw: unknown): SiteConfig {
   const b = cfg.budgets;
   const monthlySum = toMicros(b.llmGateway.monthlyUsd) + toMicros(b.dataforseo.monthlyUsd) + toMicros(b.apify.monthlyUsd) + toMicros(b.pagespeed.monthlyUsd);
   if (toMicros(b.combinedMonthlyUsd) <= 0 && monthlySum > 0) issues.push({ path: ['budgets'], message: 'combinedMonthlyUsd is zero while service budgets are positive' });
+  if (cfg.notifications.telegram.enabled && !cfg.notifications.telegram.chatId) {
+    issues.push({ path: ['notifications', 'telegram', 'chatId'], message: 'notifications.telegram.enabled is true; set the chat ID that should receive the messages' });
+  }
   if (cfg.llm.allowPersonalData && !(cfg.llm.personalDataReason ?? '').trim()) {
     issues.push({ path: ['llm', 'personalDataReason'], message: 'llm.allowPersonalData is true; state why personal data may be sent to the LLM Gateway' });
   }

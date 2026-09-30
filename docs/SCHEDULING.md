@@ -179,6 +179,13 @@ and monthly runs, use an always-on machine or a small server.
 
 ## 5. Operating scheduled jobs
 
+After every weekly run, scheduled or not, seo-agent writes the week's action
+plan (`action`, `n/a`, or `blocked`) to the plans folder and, when
+`notifications.telegram` is enabled, sends you a short Telegram message
+naming the plan status and file. A failed run still gets a `blocked` plan
+with the reason, so an unattended run never fails silently. Setup:
+[ACCESS_SETUP.md](ACCESS_SETUP.md#81-weekly-action-plans).
+
 ```sh
 npm run cli -- jobs list                     # newest first; flags jobs that look interrupted
 npm run cli -- jobs show <job-id>            # runs (pid, host), checkpointed stage results, errors

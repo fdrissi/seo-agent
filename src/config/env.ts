@@ -23,6 +23,7 @@ export const ENV_KEYS = [
   'QDRANT_URL',
   'QDRANT_API_KEY',
   'PAGESPEED_API_KEY',
+  'TELEGRAM_BOT_TOKEN',
   'SEO_AGENT_WORKSPACE',
   'SEO_AGENT_LOG_LEVEL',
   'GSC_BASE_URL',
@@ -47,6 +48,7 @@ export const SECRET_ENV_KEYS: ReadonlySet<EnvKey> = new Set<EnvKey>([
   'APIFY_TOKEN',
   'QDRANT_API_KEY',
   'PAGESPEED_API_KEY',
+  'TELEGRAM_BOT_TOKEN',
 ]);
 
 export const ENV_DEFAULTS: Partial<Record<EnvKey, string>> = {

@@ -19,6 +19,7 @@ import { playwrightAvailability, type PlaywrightLoader } from '../crawler/render
 import { openDatabase, type Db } from '../database/db.js';
 import { migrationStatus } from '../database/migrate.js';
 import { apifyStatus } from '../integrations/apify/status.js';
+import { telegramStatus } from '../integrations/telegram/status.js';
 import { dataforseoStatus } from '../integrations/dataforseo/status.js';
 import { googleStatus } from '../integrations/google/status.js';
 import { createLlmClient } from '../integrations/llm/gateway.js';
@@ -31,6 +32,7 @@ import { describeSchedules } from '../jobs/scheduler.js';
 import { listJobs } from '../jobs/store.js';
 import { memoryStatus } from '../memory/service.js';
 import { vaultIntegrationStatus } from '../obsidian/status.js';
+import { checkPlansDirLocation, inspectPlansDir, resolvePlansDir } from '../plans/folder.js';
 import { redactString } from '../security/redact.js';
 import { REINSTALL_STEPS, buildRepairSteps, checkBuildFreshness, runningBuildFreshness, scheduledRunBuildProblem, type BuildFreshness } from './build-info.js';
 import { listDrafts } from './draft.js';
@@ -585,8 +587,8 @@ function describeRequest(input: string | URL, init?: RequestInit): NetworkEntry 
   const method = (init?.method ?? 'GET').toUpperCase();
   try {
     const u = new URL(String(input));
-    // Host and path only: query strings can carry API keys.
-    return { method, host: u.host, path: u.pathname };
+    // Host and path only: query strings can carry API keys. The path is redacted too (the Telegram Bot API puts the token in it).
+    return { method, host: u.host, path: redactString(u.pathname) };
   } catch {
     return { method, host: '(invalid url)', path: '' };
   }
@@ -603,6 +605,21 @@ export function doctorFetch(allowed: boolean, base: FetchLike, log: NetworkLog):
     log.requests.push(entry);
     return base(input, init);
   };
+}
+
+/** Where weekly action plans go, and whether that folder can be used (never creates it). */
+function plansFolderCheck(ctx: Parameters<typeof resolvePlansDir>[0] & Parameters<typeof checkPlansDirLocation>[0], siteId: string): DoctorCheck {
+  const base = { id: 'plans.folder', group: 'config' as const, siteId, title: 'Action plans folder' };
+  try {
+    const { dir, source } = resolvePlansDir(ctx);
+    checkPlansDirLocation(ctx, dir);
+    const st = inspectPlansDir(dir);
+    if (st.state === 'refused') return { ...base, level: 'warn', detail: `${dir} cannot be used: ${st.reason}. Weekly runs still run, but write no plan.`, nextStep: 'Point actionPlans.dir at a new or empty folder (seo-agent creates it with a .gitignore that ignores everything).' };
+    const where = source === 'config' ? 'actionPlans.dir' : 'default';
+    return { ...base, level: 'ok', detail: st.state === 'managed' ? `${dir} (${where}); contents git-ignored.` : `${dir} (${where}); created with its .gitignore by the next weekly run.` };
+  } catch (err) {
+    return { ...base, level: 'warn', detail: `${errorMessage(err)} Weekly runs still run, but write no plan.`, ...(isAppError(err) && err.hint ? { nextStep: err.hint } : {}) };
+  }
 }
 
 async function siteChecks(
@@ -707,6 +724,9 @@ async function siteChecks(
         return [st];
       }),
     );
+
+    add(await safeStatuses('telegram', ctx, async () => [await telegramStatus(ctx, { network })]));
+    if (config.actionPlans.enabled) checks.push(plansFolderCheck(ctx, siteId));
 
     if (useWorkspaceDb) jobChecks(ctx, checks);
 
